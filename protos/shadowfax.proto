@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+option swift_prefix = "SDFAX";
+option objc_class_prefix = "SDFAX";
+
+package ShadowFax;
+
+// MARK: UserAccount
+service UserAccount {
+    // Gandalf <-> Gondor <-> UserAccount
+    rpc Signup (SignupRequest) returns (UserAccountReply) {}
+    rpc Signin (SigninRequest) returns (UserAccountReply) {}
+    rpc ChangePhone (ChangePhoneRequest) returns (UserAccountReply) {}
+    rpc GetUserUUID (GetUserUUIDRequest) returns (GetUserUUIDReplay) {}
+}
+
+message SignupRequest {
+    string phone = 1;
+    string name = 2;
+    string validation_code = 3;
+}
+
+message SigninRequest {
+    string phone = 1;
+    string validation_code = 2;
+}
+
+message ChangePhoneRequest {
+    string uuid = 1;
+    string token = 2;
+    string new_phone = 3;
+    string validation_code = 4;
+}
+
+message UserAccountReply {
+    int32 status_code = 1;
+    string uuid = 2;
+    string token = 3;
+}
+
+message GetUserUUIDRequest {
+    string uuid = 1;
+    string token = 2;
+    string dist_phone = 3;
+}
+
+message GetUserUUIDReplay {
+    int32 status_code = 1;
+    string dist_uuid = 2;
+}
+
+
+//MARK: Imladris
+service Imladris {
+    // Gandalf <-> Gondor <-> Imladris
+    rpc SendTo (SendToRequest) returns (SendToReply) {
+    }
+    // TODO: Signaling channel
+    rpc Signal (SignalRequest) returns (SignalReply){
+    }
+}
+
+message SendToRequest {
+    string source_uuid = 1;
+    string dist_uuid = 2;
+}
+
+message SendToReply {
+    string status_code = 1;
+    string dist_ip = 2;  // empty string if none
+    string dist_port = 3;// empty string if none
+}
+
+message SignalRequest {
+    string uuid = 1;
+    int32 signal = 2;
+    string msg = 3;
+}
+
+message SignalReply {
+    int32 status_code = 1;
+}
+
+//MARK: Valinor
+service Valinor {
+    // Gandalf <-> Gondor <-> Valinor
+    rpc CallRobot (ValinorRequest) returns (ValinorReply) {
+    }
+}
+message ValinorRequest {
+    string robot_id = 1;
+    string msg = 2;
+}
+
+message ValinorReply {
+    string msg = 1;
+}

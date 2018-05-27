@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+// option objc_class_prefix = "USERACCOUNT";
+
+package Valinor;
+
+service Valinor {
+    // Gandalf <-> Gondor <-> Valinor
+    rpc CallRobot (ValinorRequest) returns (ValinorReply) {
+    }
+}
+message ValinorRequest {
+    int64 robot_id = 1;
+    string msg = 2;
+}
+
+message ValinorReply {
+    string msg = 1;
+}

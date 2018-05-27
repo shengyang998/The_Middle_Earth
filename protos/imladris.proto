@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+// option objc_class_prefix = "USERACCOUNT";
+
+package Imladris;
+
+service Imladris {
+    // Gandalf <-> Gondor <-> Imladris
+    rpc SendTo (SendToRequest) returns (SendToReply) {
+    }
+    rpc Signin (SigninRequest) returns (SigninReply){
+    }
+    // TODO: Signaling channel
+    rpc Signal (SignalRequest) returns (SignalReply){
+    }
+}
+
+message SendToRequest {
+    string source_uuid = 1;
+    string dist_uuid = 2;
+}
+
+message SendToReply {
+    string status_code = 1;
+    string dist_ip = 2;  // empty string if none
+    string dist_port = 3;// empty string if none
+}
+
+message SignalRequest {
+    string uuid = 1;
+    int32 signal = 2;
+    string msg = 3;
+}
+
+message SignalReply {
+    int32 status_code = 1;
+}
+
+message SigninRequest{
+    string phone = 1;
+}
+
+message SigninReply{
+    int32 status_code = 1;
+}

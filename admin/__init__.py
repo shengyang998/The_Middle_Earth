@@ -1,0 +1,1 @@
+from .admin_pages import admin

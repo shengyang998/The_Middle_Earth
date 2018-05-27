@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController wantsFullScreenLayout="YES" id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" userInteractionEnabled="NO" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen_bg" translatesAutoresizingMaskIntoConstraints="NO" id="GRB-4c-kDc">
+                                <rect key="frame" x="0.0" y="-2" width="414" height="738"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_screen_bg2" translatesAutoresizingMaskIntoConstraints="NO" id="yUF-Lu-561">
+                                <rect key="frame" x="-44" y="117" width="502" height="502"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="yUF-Lu-561" secondAttribute="height" multiplier="320:320" id="n9R-vd-icq"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="launch_screen_fg" translatesAutoresizingMaskIntoConstraints="NO" id="9Pf-Ih-ojC">
+                                <rect key="frame" x="74.666666666666686" y="203" width="265" height="330"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="750" constant="264.5" id="GQD-8x-hJM"/>
+                                    <constraint firstAttribute="height" priority="750" constant="329.69999999999999" id="Hcp-uM-BXt"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="GRB-4c-kDc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-22" id="2i6-vD-dLl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yUF-Lu-561" secondAttribute="trailing" constant="-44" id="3Hz-wb-XDB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" relation="lessThanOrEqual" secondItem="9Pf-Ih-ojC" secondAttribute="top" id="7kJ-DQ-MQD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="GRB-4c-kDc" secondAttribute="trailing" id="A0N-KC-Izr"/>
+                            <constraint firstItem="yUF-Lu-561" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ChX-B8-OKw"/>
+                            <constraint firstItem="GRB-4c-kDc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DVu-c1-DTx"/>
+                            <constraint firstItem="yUF-Lu-561" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="VBB-5F-0y0"/>
+                            <constraint firstItem="9Pf-Ih-ojC" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="fhF-Oh-pUO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GRB-4c-kDc" secondAttribute="bottom" id="lDz-Ob-uLu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="leading" relation="lessThanOrEqual" secondItem="9Pf-Ih-ojC" secondAttribute="leading" id="njJ-IT-65U"/>
+                            <constraint firstItem="yUF-Lu-561" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-44" id="o4m-bQ-6ez"/>
+                            <constraint firstItem="9Pf-Ih-ojC" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ojX-Y9-hxQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.5" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="launch_screen_bg" width="1125" height="2436"/>
+        <image name="launch_screen_bg2" width="991" height="991"/>
+        <image name="launch_screen_fg" width="852" height="1091"/>
+    </resources>
+</document>

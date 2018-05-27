@@ -1,0 +1,5 @@
+Flask==0.12.2
+peewee==3.2.5
+redispy==3.0.0
+protobuf==3.5.2.post1
+redis==2.10.6

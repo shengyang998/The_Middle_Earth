@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+// option objc_class_prefix = "USERACCOUNT";
+
+package UserAccount;
+
+service UserAccount {
+    // Gandalf <-> Gondor <-> UserAccount
+    rpc Signup (SignupRequest) returns (UserAccountReply) {}
+    rpc Signin (SigninRequest) returns (UserAccountReply) {}
+    rpc ChangePhone (ChangePhoneRequest) returns (UserAccountReply) {}
+    rpc GetUserUUID (GetUserUUIDRequest) returns (GetUserUUIDReplay) {}
+}
+
+message SignupRequest {
+    string phone = 1;
+    string name = 2;
+    string validation_code = 3;
+}
+
+message SigninRequest {
+    string phone = 1;
+    string validation_code = 2;
+}
+
+message ChangePhoneRequest {
+    string uuid = 1;
+    string new_phone = 2;
+    string validation_code = 3;
+}
+
+message UserAccountReply {
+    int32 status_code = 1;
+    string uuid = 2;
+    string token = 3;
+}
+
+message GetUserUUIDRequest {
+    string uuid = 1;
+    string dist_phone = 2;
+}
+
+message GetUserUUIDReplay {
+    int32 status_code = 1;
+    string dist_uuid = 2;
+}
