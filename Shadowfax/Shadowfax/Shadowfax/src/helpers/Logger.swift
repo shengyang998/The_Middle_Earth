@@ -92,7 +92,7 @@ class Logger {
 
     @inline(__always)
     class func log(message: String,
-                   event: EventType = LogEvent.info,
+                   event: EventType,
                    fileName: String = #file,
                    line: Int = #line,
                    column: Int = #column,
