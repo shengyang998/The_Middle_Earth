@@ -9,10 +9,11 @@ target 'Shadowfax' do
   pod 'Chatto', '= 3.3.1'
   pod 'ChattoAdditions', '=3.3.1'
   pod 'RealmSwift', '~> 3.5.0'
-  pod 'Moya', '~> 11.0.2'
-  pod 'SwiftGRPC', '~> 0.4.3'
-  pod 'Alamofire', '~> 4.7'
+  # pod 'Moya', '~> 11.0.2'
   pod 'CocoaAsyncSocket', '~> 7.6.3'
-  pod 'Heimdall', '~> 1.1.0'
+  pod 'SwiftGRPC', '~> 0.4.3'
+  pod 'Starscream', '~> 3.0.2'
+  pod 'SwiftyRSA', '~> 1.4.0'
+  pod 'CryptoSwift', '~> 0.9.0'
 
 end
