@@ -199,6 +199,53 @@ struct SDFAXValinorReply {
   init() {}
 }
 
+/// p2p
+struct SDFAXEmptyRequestForUDP {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var nothing: Int32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct SDFAXmsgSend {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var id: Int64 = 0
+
+  var content: String = String()
+
+  var time: Int64 = 0
+
+  var type: Int32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct SDFAXmsgRecv {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var id: Int64 = 0
+
+  var isread: Int32 = 0
+
+  var time: Int64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "ShadowFax"
@@ -648,6 +695,123 @@ extension SDFAXValinorReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplem
 
   func _protobuf_generated_isEqualTo(other: SDFAXValinorReply) -> Bool {
     if self.msg != other.msg {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension SDFAXEmptyRequestForUDP: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".EmptyRequestForUDP"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "nothing"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularInt32Field(value: &self.nothing)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.nothing != 0 {
+      try visitor.visitSingularInt32Field(value: self.nothing, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: SDFAXEmptyRequestForUDP) -> Bool {
+    if self.nothing != other.nothing {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension SDFAXmsgSend: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".msgSend"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
+    2: .same(proto: "content"),
+    3: .same(proto: "time"),
+    4: .same(proto: "type"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularInt64Field(value: &self.id)
+      case 2: try decoder.decodeSingularStringField(value: &self.content)
+      case 3: try decoder.decodeSingularInt64Field(value: &self.time)
+      case 4: try decoder.decodeSingularInt32Field(value: &self.type)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.id != 0 {
+      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 1)
+    }
+    if !self.content.isEmpty {
+      try visitor.visitSingularStringField(value: self.content, fieldNumber: 2)
+    }
+    if self.time != 0 {
+      try visitor.visitSingularInt64Field(value: self.time, fieldNumber: 3)
+    }
+    if self.type != 0 {
+      try visitor.visitSingularInt32Field(value: self.type, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: SDFAXmsgSend) -> Bool {
+    if self.id != other.id {return false}
+    if self.content != other.content {return false}
+    if self.time != other.time {return false}
+    if self.type != other.type {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension SDFAXmsgRecv: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".msgRecv"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
+    2: .same(proto: "isread"),
+    3: .same(proto: "time"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularInt64Field(value: &self.id)
+      case 2: try decoder.decodeSingularInt32Field(value: &self.isread)
+      case 3: try decoder.decodeSingularInt64Field(value: &self.time)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.id != 0 {
+      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 1)
+    }
+    if self.isread != 0 {
+      try visitor.visitSingularInt32Field(value: self.isread, fieldNumber: 2)
+    }
+    if self.time != 0 {
+      try visitor.visitSingularInt64Field(value: self.time, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: SDFAXmsgRecv) -> Bool {
+    if self.id != other.id {return false}
+    if self.isread != other.isread {return false}
+    if self.time != other.time {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }
