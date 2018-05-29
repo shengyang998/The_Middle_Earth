@@ -14,6 +14,14 @@
 		097CBDEA20B8EAEA0082A32F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 097CBDE820B8EAEA0082A32F /* Main.storyboard */; };
 		097CBDEF20B8EAF70082A32F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 097CBDED20B8EAF70082A32F /* LaunchScreen.storyboard */; };
 		09C34DE520BAC32B0095240B /* SDFAXNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C34DE420BAC32B0095240B /* SDFAXNetworking.swift */; };
+		09C34DEB20BAE7470095240B /* valinor.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09C34DE720BAE7470095240B /* valinor.crt */; };
+		09C34DEC20BAE7470095240B /* gondor.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09C34DE820BAE7470095240B /* gondor.crt */; };
+		09C34DED20BAE7470095240B /* user_account.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09C34DE920BAE7470095240B /* user_account.crt */; };
+		09C34DEE20BAE7470095240B /* imladris.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09C34DEA20BAE7470095240B /* imladris.crt */; };
+		09C34DF020BAF16F0095240B /* SDFAXDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C34DEF20BAF16F0095240B /* SDFAXDB.swift */; };
+		09C34DF220BB91530095240B /* SDFAXServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C34DF120BB91530095240B /* SDFAXServer.swift */; };
+		09C34DF420BB97650095240B /* SDFAXClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C34DF320BB97650095240B /* SDFAXClient.swift */; };
+		09C34DF620BD38820095240B /* ChatNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C34DF520BD38820095240B /* ChatNetworking.swift */; };
 		09E1793920BA2D750074B851 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09E1793820BA2D750074B851 /* Assets.xcassets */; };
 		09F8842520B987E900884A03 /* WXImageCompress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F8840120B987E900884A03 /* WXImageCompress.swift */; };
 		09F8842620B987E900884A03 /* BaseMessagesSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F8840320B987E900884A03 /* BaseMessagesSelector.swift */; };
@@ -43,10 +51,6 @@
 		09F8843E20B987E900884A03 /* BaseMessageCollectionViewCellAvatarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F8842220B987E900884A03 /* BaseMessageCollectionViewCellAvatarStyle.swift */; };
 		09F8843F20B987E900884A03 /* SlidingDatasSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F8842320B987E900884A03 /* SlidingDatasSource.swift */; };
 		09F8844020B987E900884A03 /* ChatExamplesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F8842420B987E900884A03 /* ChatExamplesViewController.swift */; };
-		09F8844720B9882E00884A03 /* valinor.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09F8844320B9882E00884A03 /* valinor.crt */; };
-		09F8844820B9882E00884A03 /* gondor.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09F8844420B9882E00884A03 /* gondor.crt */; };
-		09F8844920B9882E00884A03 /* user_account.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09F8844520B9882E00884A03 /* user_account.crt */; };
-		09F8844A20B9882E00884A03 /* imladris.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09F8844620B9882E00884A03 /* imladris.crt */; };
 		09F8844E20B9885400884A03 /* shadowfax.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F8844C20B9885400884A03 /* shadowfax.grpc.swift */; };
 		09F8844F20B9885400884A03 /* shadowfax.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F8844D20B9885400884A03 /* shadowfax.pb.swift */; };
 		76D7982A093B19E3FC65AC3B /* Pods_Shadowfax.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048C8E0E27E4D35114074AA3 /* Pods_Shadowfax.framework */; };
@@ -63,6 +67,14 @@
 		097CBDEE20B8EAF70082A32F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		097CBDF020B8EAF70082A32F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09C34DE420BAC32B0095240B /* SDFAXNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDFAXNetworking.swift; sourceTree = "<group>"; };
+		09C34DE720BAE7470095240B /* valinor.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = valinor.crt; sourceTree = "<group>"; };
+		09C34DE820BAE7470095240B /* gondor.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gondor.crt; sourceTree = "<group>"; };
+		09C34DE920BAE7470095240B /* user_account.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = user_account.crt; sourceTree = "<group>"; };
+		09C34DEA20BAE7470095240B /* imladris.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imladris.crt; sourceTree = "<group>"; };
+		09C34DEF20BAF16F0095240B /* SDFAXDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDFAXDB.swift; sourceTree = "<group>"; };
+		09C34DF120BB91530095240B /* SDFAXServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDFAXServer.swift; sourceTree = "<group>"; };
+		09C34DF320BB97650095240B /* SDFAXClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDFAXClient.swift; sourceTree = "<group>"; };
+		09C34DF520BD38820095240B /* ChatNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNetworking.swift; sourceTree = "<group>"; };
 		09E1793820BA2D750074B851 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09F8840120B987E900884A03 /* WXImageCompress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WXImageCompress.swift; sourceTree = "<group>"; };
 		09F8840320B987E900884A03 /* BaseMessagesSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMessagesSelector.swift; sourceTree = "<group>"; };
@@ -92,10 +104,6 @@
 		09F8842220B987E900884A03 /* BaseMessageCollectionViewCellAvatarStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseMessageCollectionViewCellAvatarStyle.swift; sourceTree = "<group>"; };
 		09F8842320B987E900884A03 /* SlidingDatasSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingDatasSource.swift; sourceTree = "<group>"; };
 		09F8842420B987E900884A03 /* ChatExamplesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatExamplesViewController.swift; sourceTree = "<group>"; };
-		09F8844320B9882E00884A03 /* valinor.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = valinor.crt; sourceTree = "<group>"; };
-		09F8844420B9882E00884A03 /* gondor.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gondor.crt; sourceTree = "<group>"; };
-		09F8844520B9882E00884A03 /* user_account.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = user_account.crt; sourceTree = "<group>"; };
-		09F8844620B9882E00884A03 /* imladris.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imladris.crt; sourceTree = "<group>"; };
 		09F8844C20B9885400884A03 /* shadowfax.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shadowfax.grpc.swift; sourceTree = "<group>"; };
 		09F8844D20B9885400884A03 /* shadowfax.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shadowfax.pb.swift; sourceTree = "<group>"; };
 		0E591BE15209E1B145040265 /* Pods-Shadowfax.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shadowfax.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shadowfax/Pods-Shadowfax.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,7 +126,6 @@
 			isa = PBXGroup;
 			children = (
 				097CBDE120B8EAEA0082A32F /* Shadowfax */,
-				09F8844220B9882E00884A03 /* crts */,
 				097CBDE020B8EAEA0082A32F /* Products */,
 				0A9B142B66FE3BC44EBE98B9 /* Pods */,
 				4015502875A5DB9A052C039A /* Frameworks */,
@@ -142,8 +149,20 @@
 				09F8840020B987E900884A03 /* src */,
 				097CBDED20B8EAF70082A32F /* LaunchScreen.storyboard */,
 				097CBDF020B8EAF70082A32F /* Info.plist */,
+				09C34DE620BAE7470095240B /* crts */,
 			);
 			path = Shadowfax;
+			sourceTree = "<group>";
+		};
+		09C34DE620BAE7470095240B /* crts */ = {
+			isa = PBXGroup;
+			children = (
+				09C34DE720BAE7470095240B /* valinor.crt */,
+				09C34DE820BAE7470095240B /* gondor.crt */,
+				09C34DE920BAE7470095240B /* user_account.crt */,
+				09C34DEA20BAE7470095240B /* imladris.crt */,
+			);
+			path = crts;
 			sourceTree = "<group>";
 		};
 		09F8840020B987E900884A03 /* src */ = {
@@ -254,19 +273,12 @@
 				093BEB9D20B9B63000CEF4BA /* Helpers.swift */,
 				093BEB9F20B9B64800CEF4BA /* GlobalConstants.swift */,
 				09C34DE420BAC32B0095240B /* SDFAXNetworking.swift */,
+				09C34DF520BD38820095240B /* ChatNetworking.swift */,
+				09C34DEF20BAF16F0095240B /* SDFAXDB.swift */,
+				09C34DF120BB91530095240B /* SDFAXServer.swift */,
+				09C34DF320BB97650095240B /* SDFAXClient.swift */,
 			);
 			path = helpers;
-			sourceTree = "<group>";
-		};
-		09F8844220B9882E00884A03 /* crts */ = {
-			isa = PBXGroup;
-			children = (
-				09F8844320B9882E00884A03 /* valinor.crt */,
-				09F8844420B9882E00884A03 /* gondor.crt */,
-				09F8844520B9882E00884A03 /* user_account.crt */,
-				09F8844620B9882E00884A03 /* imladris.crt */,
-			);
-			path = crts;
 			sourceTree = "<group>";
 		};
 		09F8844B20B9885400884A03 /* protos */ = {
@@ -356,13 +368,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09F8844A20B9882E00884A03 /* imladris.crt in Resources */,
+				09C34DEE20BAE7470095240B /* imladris.crt in Resources */,
 				097CBDEF20B8EAF70082A32F /* LaunchScreen.storyboard in Resources */,
-				09F8844920B9882E00884A03 /* user_account.crt in Resources */,
-				09F8844720B9882E00884A03 /* valinor.crt in Resources */,
+				09C34DED20BAE7470095240B /* user_account.crt in Resources */,
 				097CBDEA20B8EAEA0082A32F /* Main.storyboard in Resources */,
-				09F8844820B9882E00884A03 /* gondor.crt in Resources */,
+				09C34DEB20BAE7470095240B /* valinor.crt in Resources */,
 				09E1793920BA2D750074B851 /* Assets.xcassets in Resources */,
+				09C34DEC20BAE7470095240B /* gondor.crt in Resources */,
 				09F8843920B987E900884A03 /* SendingStatusCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,35 +389,33 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Shadowfax/Pods-Shadowfax-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/Chatto/Chatto.framework",
 				"${BUILT_PRODUCTS_DIR}/ChattoAdditions/ChattoAdditions.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
-				"${BUILT_PRODUCTS_DIR}/Heimdall/Heimdall.framework",
-				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftGRPC/SwiftGRPC.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyRSA/SwiftyRSA.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Chatto.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChattoAdditions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Heimdall.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftGRPC.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyRSA.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -440,10 +450,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				093BEB9C20B9A71400CEF4BA /* Logger.swift in Sources */,
+				09C34DF420BB97650095240B /* SDFAXClient.swift in Sources */,
 				09F8843420B987E900884A03 /* DemoPhotoMessageViewModel.swift in Sources */,
 				09F8843520B987E900884A03 /* DemoPhotoMessageModel.swift in Sources */,
 				09F8842720B987E900884A03 /* MessagesSelectorProtocol.swift in Sources */,
 				09F8842920B987E900884A03 /* AddRandomMessageChatViewController.swift in Sources */,
+				09C34DF220BB91530095240B /* SDFAXServer.swift in Sources */,
 				09F8842520B987E900884A03 /* WXImageCompress.swift in Sources */,
 				09F8842B20B987E900884A03 /* DemoChatViewController.swift in Sources */,
 				09F8843F20B987E900884A03 /* SlidingDatasSource.swift in Sources */,
@@ -453,12 +465,14 @@
 				09F8843620B987E900884A03 /* DemoPhotoMessageHandler.swift in Sources */,
 				09F8844E20B9885400884A03 /* shadowfax.grpc.swift in Sources */,
 				09F8842620B987E900884A03 /* BaseMessagesSelector.swift in Sources */,
+				09C34DF020BAF16F0095240B /* SDFAXDB.swift in Sources */,
 				09F8842820B987E900884A03 /* CellsViewController.swift in Sources */,
 				09F8843C20B987E900884A03 /* DemoTextMessageViewModel.swift in Sources */,
 				09C34DE520BAC32B0095240B /* SDFAXNetworking.swift in Sources */,
 				093BEBA020B9B64800CEF4BA /* GlobalConstants.swift in Sources */,
 				09F8842A20B987E900884A03 /* DemoChatMessageSender.swift in Sources */,
 				09F8842E20B987E900884A03 /* DemoChatMessageFactory.swift in Sources */,
+				09C34DF620BD38820095240B /* ChatNetworking.swift in Sources */,
 				09F8843820B987E900884A03 /* SendingStatusCollectionViewCell.swift in Sources */,
 				09F8844F20B9885400884A03 /* shadowfax.pb.swift in Sources */,
 				09F8843E20B987E900884A03 /* BaseMessageCollectionViewCellAvatarStyle.swift in Sources */,
@@ -621,10 +635,7 @@
 				DEVELOPMENT_TEAM = N7VVB6PWZS;
 				INFOPLIST_FILE = Shadowfax/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = self.ysy.Shadowfax;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -641,10 +652,7 @@
 				DEVELOPMENT_TEAM = N7VVB6PWZS;
 				INFOPLIST_FILE = Shadowfax/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = self.ysy.Shadowfax;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
