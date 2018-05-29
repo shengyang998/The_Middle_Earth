@@ -95,3 +95,21 @@ message ValinorRequest {
 message ValinorReply {
     string msg = 1;
 }
+
+// p2p
+message EmptyRequestForUDP {
+    int32 nothing = 1;
+}
+
+message msgSend {
+    int64 id = 1;
+    string content = 2;
+    int64 time = 3;
+    int32 type = 4;
+}
+
+message msgRecv {
+    int64 id = 1;
+    int32 isread = 2;
+    int64 time = 3;
+}
