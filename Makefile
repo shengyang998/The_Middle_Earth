@@ -30,7 +30,7 @@ gen_key:
 	openssl req -newkey rsa:2048 -nodes -keyout keys/valinor.key -x509 -days 365 -out keys/valinor.crt -subj "/C=CN/ST=GD/L=SZ/O=SDMC/OU=SystemDepartment/CN=api.superyoung.win"
 
 gen_keys_to_client: gen_key
-	cp ./keys/*.crt Shadowfax/Shadowfax/crts/
+	cp ./keys/*.crt Shadowfax/Shadowfax/Shadowfax/crts/
 
 reconstruct: clean
 	touch imladris/protos/__init__.py user_account/protos/__init__.py valinor/protos/__init__.py
