@@ -12,6 +12,10 @@ import UIKit
 struct GlobalConstants {
 
     // Constants
+    static let databaseVersion: UInt64 = 1
+    static let standardHearBeatsTimeInterval = TimeInterval(150)
+    static let standardTimeout = TimeInterval(30)
+
     static let isLoginKey = "is login key"
     static var isLogin: Bool {
         get { return UserDefaults.standard.bool(forKey: isLoginKey) }
@@ -20,8 +24,26 @@ struct GlobalConstants {
 
     static let uuidKey = "UUID Key For This User"
     static var selfUUID: String {
-        get { return UserDefaults.standard.string(forKey: uuidKey) ?? "default uuid" }
+        get {
+            guard let res = UserDefaults.standard.string(forKey: uuidKey) else {
+                Logger.warning(message: "User's UUID not set. Using `default` instead.")
+                return "default"
+            }
+            return res
+        }
         set { set(newValue, forKey: uuidKey) }
+    }
+
+    static let tokenKey = "Token for This User"
+    static var selfToken: String {
+        get {
+            guard let res = UserDefaults.standard.string(forKey: tokenKey) else {
+                Logger.warning(message: "User's Token not set. Using `default` instead.")
+                return "default"
+            }
+            return res
+        }
+        set { set(newValue, forKey: tokenKey) }
     }
 
     static let imladrisIpKey = "The IP of imladris server"
@@ -37,6 +59,21 @@ struct GlobalConstants {
     static let imladrisAddressKey = "The Address of imladris server"
     static var imladrisAddress: String {
         get { return imladrisIp + ":" + imladrisPort }
+    }
+
+    static let gondorIpKey = "The IP of imladris server"
+    static var gondorIp: String {
+        get { return UserDefaults.standard.string(forKey: gondorIpKey) ?? "150.109.40.31" }
+        set { set(newValue, forKey: gondorIpKey) }
+    }
+    static let gondorPortKey = "The Port of imladris server"
+    static var gondorPort: String {
+        get { return UserDefaults.standard.string(forKey: gondorPortKey) ?? "5000" }
+        set { set(newValue, forKey: gondorPortKey) }
+    }
+    static let gondorAddressKey = "The Address of imladris server"
+    static var gondorAddress: String {
+        get { return gondorIp + ":" + gondorPort }
     }
 
 
