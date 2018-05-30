@@ -48,20 +48,25 @@ class ChatNetworking: NSObject {
         }
     }
 
-    lazy var queue = DispatchQueue(label: "self.ysy.Shadowfax.\(self)", qos: .utility)
+    private lazy var queue = DispatchQueue(label: "self.ysy.Shadowfax.\(self)", qos: .utility)
 
-    lazy var socket: GCDAsyncSocket = GCDAsyncSocket(delegate: self, delegateQueue: self.queue)
-    lazy var udpSocket: GCDAsyncUdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: self.queue)
+    private lazy var socket: GCDAsyncSocket = GCDAsyncSocket(delegate: self, delegateQueue: self.queue)
+    private lazy var udpSocket: GCDAsyncUdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: self.queue)
 
-    lazy var emptyUDPRequest: SDFAXEmptyRequestForUDP = {
+    private lazy var emptyUDPRequest: SDFAXEmptyRequestForUDP = {
         var t = SDFAXEmptyRequestForUDP();
         t.nothing = 3;
         return t;
     }()
 
-    lazy var AESKey: Array<UInt8> = try! HKDF(password: GlobalConstants.InitialVector).calculate()
+    private lazy var AESKey: Array<UInt8> = try! HKDF(password: GlobalConstants.InitialVector).calculate()
     lazy var iv: Array<UInt8> = try! HKDF(password: GlobalConstants.InitialVector).calculate()
     var isSecured: Bool = false
+
+    override init() {
+        super.init()
+        self.startHandShakeListening(onPort: GlobalConstants.clientPort)
+    }
 }
 
 extension ChatNetworking {
@@ -77,6 +82,8 @@ extension ChatNetworking {
         if !udpSocket.isConnected() {
             do {
                 try udpSocket.connect(toHost: host, onPort: port)
+                try udpSocket.send(emptyUDPRequest.serializedData(), withTimeout: standardTimeout, tag: 1)
+                try udpSocket.send(emptyUDPRequest.serializedData(), withTimeout: standardTimeout, tag: 1)
                 try udpSocket.send(emptyUDPRequest.serializedData(), withTimeout: standardTimeout, tag: 1)
                 udpSocket.closeAfterSending()
             }
@@ -96,7 +103,7 @@ extension ChatNetworking {
 
     // MAKR: send or make hand shake methods
     func initiativlyMakeSecureHandShake(to address: HostAddress) -> Bool {
-        // TODO
+        // MARK
         // 1. alice.pub                            ->   bob
         // 2. alice                                <-   crypto(bob.AESKey, with: alice.pub) // FIXME: Should not. Because the `bob.AESKey` is unable to verify.
         // 3. crypto(alice.AESKey, with: bob.pub)  ->   bob
@@ -108,16 +115,16 @@ extension ChatNetworking {
         return true
     }
 
+    // MARK: get or make hand shake passively
     func passivelyMakeSecureHandShake() {
         // 1. already accept on port 52013
         // 2. `did accept new socket` delegate handle rsa pub from bob
-        // 3.
         self.socket.readData(toLength: UInt(headerByte), withTimeout: -1, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
     }
 
     func sendPUB(to address: HostAddress) {
         let pub = try! self.pubKey.data()
-        let headerLength = Data.init(from: HeaderLength(pub.count))
+        let headerLength = Data(from: HeaderLength(pub.count))
         self.socket.write(headerLength, withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeHeaderTag.rawValue)
         self.socket.write(pub, withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeBodyTag.rawValue)
     }
@@ -256,15 +263,15 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
     }
 
     func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
-        Logger.info(message: "didWriteDataWithTag: \(tag)")
-    }
-
-    func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
-        Logger.info(message: "did disconnect with error: \(String(describing: err))")
+        Logger.info(message: "didWriteDataWithTag: \(ChatNetworkingTags(rawValue: tag))")
     }
 
     func socket(_ sock: GCDAsyncSocket, didConnectTo url: URL) {
         Logger.info(message: "did connect to: \(url)")
+    }
+
+    func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
+        Logger.info(message: "did disconnect with error: \(String(describing: err))")
     }
 
 }
