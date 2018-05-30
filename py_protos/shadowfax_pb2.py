@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='shadowfax.proto',
   package='ShadowFax',
   syntax='proto3',
-  serialized_pb=_b('\n\x0fshadowfax.proto\x12\tShadowFax\"E\n\rSignupRequest\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x03 \x01(\t\"7\n\rSigninRequest\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x02 \x01(\t\"]\n\x12\x43hangePhoneRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\r\n\x05token\x18\x02 \x01(\t\x12\x11\n\tnew_phone\x18\x03 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x04 \x01(\t\"D\n\x10UserAccountReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x0c\n\x04uuid\x18\x02 \x01(\t\x12\r\n\x05token\x18\x03 \x01(\t\"E\n\x12GetUserUUIDRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\r\n\x05token\x18\x02 \x01(\t\x12\x12\n\ndist_phone\x18\x03 \x01(\t\";\n\x11GetUserUUIDReplay\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x11\n\tdist_uuid\x18\x02 \x01(\t\"7\n\rSendToRequest\x12\x13\n\x0bsource_uuid\x18\x01 \x01(\t\x12\x11\n\tdist_uuid\x18\x02 \x01(\t\"F\n\x0bSendToReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\t\x12\x0f\n\x07\x64ist_ip\x18\x02 \x01(\t\x12\x11\n\tdist_port\x18\x03 \x01(\t\":\n\rSignalRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x0e\n\x06signal\x18\x02 \x01(\x05\x12\x0b\n\x03msg\x18\x03 \x01(\t\"\"\n\x0bSignalReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\"/\n\x0eValinorRequest\x12\x10\n\x08robot_id\x18\x01 \x01(\t\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x1b\n\x0cValinorReply\x12\x0b\n\x03msg\x18\x01 \x01(\t\"%\n\x12\x45mptyRequestForUDP\x12\x0f\n\x07nothing\x18\x01 \x01(\x05\"B\n\x07msgSend\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x0f\n\x07\x63ontent\x18\x02 \x01(\t\x12\x0c\n\x04time\x18\x03 \x01(\x03\x12\x0c\n\x04type\x18\x04 \x01(\x05\"3\n\x07msgRecv\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x0e\n\x06isread\x18\x02 \x01(\x05\x12\x0c\n\x04time\x18\x03 \x01(\x03\x32\xae\x02\n\x0bUserAccount\x12\x41\n\x06Signup\x12\x18.ShadowFax.SignupRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x12\x41\n\x06Signin\x12\x18.ShadowFax.SigninRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x12K\n\x0b\x43hangePhone\x12\x1d.ShadowFax.ChangePhoneRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x12L\n\x0bGetUserUUID\x12\x1d.ShadowFax.GetUserUUIDRequest\x1a\x1c.ShadowFax.GetUserUUIDReplay\"\x00\x32\x86\x01\n\x08Imladris\x12<\n\x06SendTo\x12\x18.ShadowFax.SendToRequest\x1a\x16.ShadowFax.SendToReply\"\x00\x12<\n\x06Signal\x12\x18.ShadowFax.SignalRequest\x1a\x16.ShadowFax.SignalReply\"\x00\x32L\n\x07Valinor\x12\x41\n\tCallRobot\x12\x19.ShadowFax.ValinorRequest\x1a\x17.ShadowFax.ValinorReply\"\x00\x42\x10\xa2\x02\x05SDFAX\xba\x02\x05SDFAXb\x06proto3')
+  serialized_pb=_b('\n\x0fshadowfax.proto\x12\tShadowFax\"E\n\rSignupRequest\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x03 \x01(\t\"7\n\rSigninRequest\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x02 \x01(\t\"]\n\x12\x43hangePhoneRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\r\n\x05token\x18\x02 \x01(\t\x12\x11\n\tnew_phone\x18\x03 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x04 \x01(\t\"D\n\x10UserAccountReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x0c\n\x04uuid\x18\x02 \x01(\t\x12\r\n\x05token\x18\x03 \x01(\t\"E\n\x12GetUserUUIDRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\r\n\x05token\x18\x02 \x01(\t\x12\x12\n\ndist_phone\x18\x03 \x01(\t\";\n\x11GetUserUUIDReplay\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x11\n\tdist_uuid\x18\x02 \x01(\t\"7\n\rSendToRequest\x12\x13\n\x0bsource_uuid\x18\x01 \x01(\t\x12\x11\n\tdist_uuid\x18\x02 \x01(\t\"F\n\x0bSendToReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\t\x12\x0f\n\x07\x64ist_ip\x18\x02 \x01(\t\x12\x11\n\tdist_port\x18\x03 \x01(\t\":\n\rSignalRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x0e\n\x06signal\x18\x02 \x01(\x05\x12\x0b\n\x03msg\x18\x03 \x01(\t\"\"\n\x0bSignalReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\"/\n\x0eValinorRequest\x12\x10\n\x08robot_id\x18\x01 \x01(\t\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x1b\n\x0cValinorReply\x12\x0b\n\x03msg\x18\x01 \x01(\t\"%\n\x12\x45mptyRequestForUDP\x12\x0f\n\x07nothing\x18\x01 \x01(\x05\"B\n\x07msgSend\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0f\n\x07payload\x18\x02 \x01(\t\x12\x0c\n\x04time\x18\x03 \x01(\x04\x12\x0c\n\x04type\x18\x04 \x01(\x05\"3\n\x07msgRecv\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0e\n\x06isread\x18\x02 \x01(\x08\x12\x0c\n\x04time\x18\x03 \x01(\x04\x32\xae\x02\n\x0bUserAccount\x12\x41\n\x06Signup\x12\x18.ShadowFax.SignupRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x12\x41\n\x06Signin\x12\x18.ShadowFax.SigninRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x12K\n\x0b\x43hangePhone\x12\x1d.ShadowFax.ChangePhoneRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x12L\n\x0bGetUserUUID\x12\x1d.ShadowFax.GetUserUUIDRequest\x1a\x1c.ShadowFax.GetUserUUIDReplay\"\x00\x32\x86\x01\n\x08Imladris\x12<\n\x06SendTo\x12\x18.ShadowFax.SendToRequest\x1a\x16.ShadowFax.SendToReply\"\x00\x12<\n\x06Signal\x12\x18.ShadowFax.SignalRequest\x1a\x16.ShadowFax.SignalReply\"\x00\x32L\n\x07Valinor\x12\x41\n\tCallRobot\x12\x19.ShadowFax.ValinorRequest\x1a\x17.ShadowFax.ValinorReply\"\x00\x42\x10\xa2\x02\x05SDFAX\xba\x02\x05SDFAXb\x06proto3')
 )
 
 
@@ -556,13 +556,13 @@ _MSGSEND = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='id', full_name='ShadowFax.msgSend.id', index=0,
-      number=1, type=3, cpp_type=2, label=1,
+      number=1, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='content', full_name='ShadowFax.msgSend.content', index=1,
+      name='payload', full_name='ShadowFax.msgSend.payload', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -570,7 +570,7 @@ _MSGSEND = _descriptor.Descriptor(
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='time', full_name='ShadowFax.msgSend.time', index=2,
-      number=3, type=3, cpp_type=2, label=1,
+      number=3, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -608,21 +608,21 @@ _MSGRECV = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='id', full_name='ShadowFax.msgRecv.id', index=0,
-      number=1, type=3, cpp_type=2, label=1,
+      number=1, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='isread', full_name='ShadowFax.msgRecv.isread', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='time', full_name='ShadowFax.msgRecv.time', index=2,
-      number=3, type=3, cpp_type=2, label=1,
+      number=3, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,

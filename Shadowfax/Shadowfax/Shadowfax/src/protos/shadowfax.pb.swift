@@ -217,11 +217,11 @@ struct SDFAXmsgSend {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: Int64 = 0
+  var id: UInt64 = 0
 
-  var content: String = String()
+  var payload: String = String()
 
-  var time: Int64 = 0
+  var time: UInt64 = 0
 
   var type: Int32 = 0
 
@@ -235,11 +235,11 @@ struct SDFAXmsgRecv {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: Int64 = 0
+  var id: UInt64 = 0
 
-  var isread: Int32 = 0
+  var isread: Bool = false
 
-  var time: Int64 = 0
+  var time: UInt64 = 0
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -733,7 +733,7 @@ extension SDFAXmsgSend: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   static let protoMessageName: String = _protobuf_package + ".msgSend"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
-    2: .same(proto: "content"),
+    2: .same(proto: "payload"),
     3: .same(proto: "time"),
     4: .same(proto: "type"),
   ]
@@ -741,9 +741,9 @@ extension SDFAXmsgSend: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt64Field(value: &self.id)
-      case 2: try decoder.decodeSingularStringField(value: &self.content)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.time)
+      case 1: try decoder.decodeSingularUInt64Field(value: &self.id)
+      case 2: try decoder.decodeSingularStringField(value: &self.payload)
+      case 3: try decoder.decodeSingularUInt64Field(value: &self.time)
       case 4: try decoder.decodeSingularInt32Field(value: &self.type)
       default: break
       }
@@ -752,13 +752,13 @@ extension SDFAXmsgSend: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.id != 0 {
-      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 1)
+      try visitor.visitSingularUInt64Field(value: self.id, fieldNumber: 1)
     }
-    if !self.content.isEmpty {
-      try visitor.visitSingularStringField(value: self.content, fieldNumber: 2)
+    if !self.payload.isEmpty {
+      try visitor.visitSingularStringField(value: self.payload, fieldNumber: 2)
     }
     if self.time != 0 {
-      try visitor.visitSingularInt64Field(value: self.time, fieldNumber: 3)
+      try visitor.visitSingularUInt64Field(value: self.time, fieldNumber: 3)
     }
     if self.type != 0 {
       try visitor.visitSingularInt32Field(value: self.type, fieldNumber: 4)
@@ -768,7 +768,7 @@ extension SDFAXmsgSend: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
 
   func _protobuf_generated_isEqualTo(other: SDFAXmsgSend) -> Bool {
     if self.id != other.id {return false}
-    if self.content != other.content {return false}
+    if self.payload != other.payload {return false}
     if self.time != other.time {return false}
     if self.type != other.type {return false}
     if unknownFields != other.unknownFields {return false}
@@ -787,9 +787,9 @@ extension SDFAXmsgRecv: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularInt64Field(value: &self.id)
-      case 2: try decoder.decodeSingularInt32Field(value: &self.isread)
-      case 3: try decoder.decodeSingularInt64Field(value: &self.time)
+      case 1: try decoder.decodeSingularUInt64Field(value: &self.id)
+      case 2: try decoder.decodeSingularBoolField(value: &self.isread)
+      case 3: try decoder.decodeSingularUInt64Field(value: &self.time)
       default: break
       }
     }
@@ -797,13 +797,13 @@ extension SDFAXmsgRecv: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementat
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.id != 0 {
-      try visitor.visitSingularInt64Field(value: self.id, fieldNumber: 1)
+      try visitor.visitSingularUInt64Field(value: self.id, fieldNumber: 1)
     }
-    if self.isread != 0 {
-      try visitor.visitSingularInt32Field(value: self.isread, fieldNumber: 2)
+    if self.isread != false {
+      try visitor.visitSingularBoolField(value: self.isread, fieldNumber: 2)
     }
     if self.time != 0 {
-      try visitor.visitSingularInt64Field(value: self.time, fieldNumber: 3)
+      try visitor.visitSingularUInt64Field(value: self.time, fieldNumber: 3)
     }
     try unknownFields.traverse(visitor: &visitor)
   }

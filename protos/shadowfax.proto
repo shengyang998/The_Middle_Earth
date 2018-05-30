@@ -102,14 +102,14 @@ message EmptyRequestForUDP {
 }
 
 message msgSend {
-    int64 id = 1;
-    string content = 2;
-    int64 time = 3;
+    uint64 id = 1;
+    string payload = 2;
+    uint64 time = 3;
     int32 type = 4;
 }
 
 message msgRecv {
-    int64 id = 1;
-    int32 isread = 2;
-    int64 time = 3;
+    uint64 id = 1;
+    bool isread = 2;
+    uint64 time = 3;
 }

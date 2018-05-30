@@ -15,6 +15,7 @@ struct GlobalConstants {
     static let databaseVersion: UInt64 = 1
     static let standardHearBeatsTimeInterval = TimeInterval(150)
     static let standardTimeout = TimeInterval(30)
+    static let InitialVector: Array<UInt8> = Array("FUGCdssIiiusts".utf8)
 
     static let isLoginKey = "is login key"
     static var isLogin: Bool {
