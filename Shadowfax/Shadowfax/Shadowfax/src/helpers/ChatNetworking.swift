@@ -12,7 +12,13 @@ import CryptoSwift
 import CocoaAsyncSocket
 
 fileprivate enum ChatNetworkingTags: Int {
-    case headerTag = 100, bodyTag, chatHeaderTag, chatBodyTag, chatRecvBodyTag
+    case initiativeHandShakeHeaderTag = 100,
+    initiativeHandShakeBodyTag,
+    chatHeaderTag,
+    chatBodyTag,
+    chatRecvBodyTag,
+    passiveHandShakeHeaderTag,
+    passiveHandShakeBodyTag
 }
 
 fileprivate enum ChatNetworkingLength: UInt {
@@ -46,7 +52,6 @@ class ChatNetworking: NSObject {
 
     lazy var socket: GCDAsyncSocket = GCDAsyncSocket(delegate: self, delegateQueue: self.queue)
     lazy var udpSocket: GCDAsyncUdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: self.queue)
-//    lazy var chatSocket: GCDAsyncSocket = GCDAsyncSocket(delegate: ChatSocketDelegate(), delegateQueue: self.queue)
 
     lazy var emptyUDPRequest: SDFAXEmptyRequestForUDP = {
         var t = SDFAXEmptyRequestForUDP();
@@ -80,37 +85,14 @@ extension ChatNetworking {
         }
     }
 
-//    func prepareChatSocket(address: HostAddress) {
-//        if self.handShakeSocket.isConnected {
-//            self.handShakeSocket.disconnectAfterWriting()
-//        }
-//        do {
-//            let host = address.ip
-//            let port = address.port
-//            try self.chatSocket.connect(toHost: host, onPort: port, withTimeout: standardTimeout)
-//        }
-//        catch { Logger.error(message: "\(error)") }
-//    }
-
     // MARK: start listening methods
     func startHandShakeListening(onPort port: UInt16) {
-//        if self.chatSocket.isConnected {
-//            self.chatSocket.disconnectAfterWriting()
-//        }
         if let _ = try? self.socket.accept(onPort: port) {
             Logger.info(message: "Scoket is listening on port: \(port)")
         } else {
             Logger.warning(message: "Port: \(port) has been occupied.")
         }
     }
-
-//    func startChatSocketListening(onPort port: UInt16) {
-//        if let _ = try? self.chatSocket.accept(onPort: port) {
-//            Logger.info(message: "Scoket is listening on port: \(port)")
-//        } else {
-//            Logger.warning(message: "Port: \(port) has been occupied.")
-//        }
-//    }
 
     // MAKR: send or make hand shake methods
     func initiativlyMakeSecureHandShake(to address: HostAddress) -> Bool {
@@ -120,22 +102,24 @@ extension ChatNetworking {
         // 3. crypto(alice.AESKey, with: bob.pub)  ->   bob
         prepareSocket(toHost: address.ip, onPort: address.port)
         sendPUB(to: address)
-        self.socket.readData(toLength: ChatNetworkingLength.headerLength.rawValue, withTimeout: standardTimeout, tag: ChatNetworkingTags.headerTag.rawValue)
+        self.socket.readData(toLength: ChatNetworkingLength.headerLength.rawValue, withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeHeaderTag.rawValue)
         // now delegate to handle bob's AESKey
-
 
         return true
     }
 
-    func passivelyMakeSecureHandShake(to address: HostAddress) -> Bool {
-        
+    func passivelyMakeSecureHandShake() {
+        // 1. already accept on port 52013
+        // 2. `did accept new socket` delegate handle rsa pub from bob
+        // 3.
+        self.socket.readData(toLength: UInt(headerByte), withTimeout: -1, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
     }
 
     func sendPUB(to address: HostAddress) {
         let pub = try! self.pubKey.data()
         let headerLength = Data.init(from: HeaderLength(pub.count))
-        self.socket.write(headerLength, withTimeout: standardTimeout, tag: ChatNetworkingTags.headerTag.rawValue)
-        self.socket.write(pub, withTimeout: standardTimeout, tag: ChatNetworkingTags.bodyTag.rawValue)
+        self.socket.write(headerLength, withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeHeaderTag.rawValue)
+        self.socket.write(pub, withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeBodyTag.rawValue)
     }
 
     func sendTo(msg: String, id: UInt64) {
@@ -167,6 +151,7 @@ extension ChatNetworking {
     func getAESKey(encryptedData data: Data) -> Array<UInt8>? {
         let encrypted = EncryptedMessage(data: data)
         do {
+            // MARK: Don't know if this would work
             let t = try encrypted.decrypted(with: self.priKey, padding: Padding.PKCS1)
             Logger.debug(message: "decrypted data (AESKey): \(t)")
             return Array(t.data)
@@ -191,12 +176,16 @@ extension ChatNetworking {
 
     func getDecryptedRecv(encryptedData data: Data) -> SDFAXmsgRecv? {
         do {
-            let ase = self.aes
-            let decryptedByteStream = try aes!.decrypt(Array(data))
-            let decryptedData = Data(decryptedByteStream)
-            let recv = try SDFAXmsgRecv(serializedData: decryptedData)
-            Logger.debug(message: "Recv Decrypted: msg \(recv.id) \(recv.isread ? "is read" : "is sent")")
-            return recv
+            if let aes = self.aes {
+                let decryptedByteStream = try aes.decrypt(Array(data))
+                let decryptedData = Data(decryptedByteStream)
+                let recv = try SDFAXmsgRecv(serializedData: decryptedData)
+                Logger.debug(message: "Recv Decrypted: msg \(recv.id) \(recv.isread ? "is read" : "is sent")")
+                return recv
+            } else {
+                Logger.error(message: "Cannot init aes instance.")
+                return nil
+            }
         } catch {
             Logger.severe(message: "Reading recv failed with error: \(error)")
             return nil
@@ -212,12 +201,12 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
 
         switch tag {
         // MARK: hand shake header -> body length
-        case ChatNetworkingTags.headerTag.rawValue:
+        case ChatNetworkingTags.initiativeHandShakeHeaderTag.rawValue:
             let bodyLength = data.to(type: HeaderLength.self)
-            sock.readData(toLength: UInt(bodyLength), withTimeout: standardTimeout, tag: ChatNetworkingTags.bodyTag.rawValue)
+            sock.readData(toLength: UInt(bodyLength), withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeBodyTag.rawValue)
 
         // MARK: hand shake body: rsa(AESKey)
-        case ChatNetworkingTags.bodyTag.rawValue:
+        case ChatNetworkingTags.initiativeHandShakeBodyTag.rawValue:
             self.AESKey = getAESKey(encryptedData: data)!
             self.isSecured = true
 
@@ -242,9 +231,28 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
             let decryptedRecv = getDecryptedRecv(encryptedData: data)
             // MARK: Realm invoke! DataSource invoke!
 
+        // MARK: passively handshake header
+        case ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue:
+            let bodyLength = data.to(type: HeaderLength.self)
+            sock.readData(toLength: UInt(bodyLength), withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeBodyTag.rawValue)
+
+        // MARK: passively body: pub
+        case ChatNetworkingTags.passiveHandShakeBodyTag.rawValue:
+            let pubKey = try! PublicKey(data: data)
+            let clearAESKey = ClearMessage(data: Data(self.AESKey))
+            let encryptedAESKey = try! clearAESKey.encrypted(with: pubKey, padding: Padding.PKCS1)
+            let headerLength = UInt(encryptedAESKey.data.count)
+            socket.write(Data(from: headerLength), withTimeout: standardTimeout, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
+            socket.write(encryptedAESKey.data, withTimeout: standardTimeout, tag: ChatNetworkingTags.passiveHandShakeBodyTag.rawValue)
+
         default:
             Logger.error(message: "This tag is not defined!")
         }
+    }
+
+    func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
+        self.socket = newSocket
+        self.passivelyMakeSecureHandShake()
     }
 
     func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
@@ -271,28 +279,6 @@ extension ChatNetworking: GCDAsyncUdpSocketDelegate {
         Logger.warning(message: "UDP didNotSendDataWith Tag: \(tag)")
     }
 }
-
-//class ChatSocketDelegate: NSObject, GCDAsyncSocketDelegate {
-//
-//    func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
-//        Logger.info(message: "did read data with tag: \(tag)")
-//        Logger.info(message: "and data: \(String(describing: String(data: data, encoding: .utf8)))")
-//
-//    }
-//
-//    func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
-//        Logger.info(message: "did disconnect with error: \(String(describing: err))")
-//    }
-//
-//    func socket(_ sock: GCDAsyncSocket, didConnectTo url: URL) {
-//        Logger.info(message: "did connect to: \(url)")
-//    }
-//
-//    func socket(_ sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
-//        Logger.info(message: "didWriteDataWithTag: \(tag)")
-//    }
-//
-//}
 
 fileprivate extension Data {
     func toBodyLength() -> UInt {
