@@ -16,6 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         SDFAXDB.migrateDatabase(toVersion: GlobalConstants.databaseVersion)
+        let realm = SDFAXDB.makeConnection()!
+        try? realm.write {
+            let contact = Contact.makeTest()
+            realm.add(contact, update: true)
+            Message.makeTestMessages(sender: contact).forEach { realm.add($0, update: true) }
+        }
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = Main.View()
+        window.makeKeyAndVisible()
+        self.window = window
         return true
     }
 

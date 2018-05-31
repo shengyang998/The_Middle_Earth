@@ -108,7 +108,7 @@ extension ChatNetworking {
         // 2. alice                                <-   crypto(bob.AESKey, with: alice.pub) // FIXME: Should not. Because the `bob.AESKey` is unable to verify.
         // 3. crypto(alice.AESKey, with: bob.pub)  ->   bob
         dispatchGroup.enter()
-        prepareSocket(toHost: address.ip, onPort: address.port)
+        prepareSocket(toHost: address.ip, onPort: UInt16(address.port))
         if self.isSecured == false {
             sendPUB(to: address)
             self.socket.readData(toLength: headerByte, withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeHeaderTag.rawValue)
