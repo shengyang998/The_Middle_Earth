@@ -36,3 +36,35 @@ extension Date {
     }
 
 }
+
+extension SDFAXmsgSend {
+    init(id: UInt64, payload: String, time: UInt64) {
+        self.id = id
+        self.payload = payload
+        self.time = time
+    }
+}
+
+extension SDFAXmsgRecv {
+    init(id: UInt64, isread: Bool, time: UInt64) {
+        self.id = id
+        self.isread = isread
+        self.time = time
+    }
+}
+
+extension SDFAXSignalRequest {
+    init(uuid: String, signal: Int32, msg: String) {
+        self.uuid = uuid
+        self.signal = signal
+        self.msg = msg
+    }
+}
+
+extension SDFAXSendToRequest {
+    init(sourceUuid: String, distUuid: String) {
+        self.sourceUuid = sourceUuid
+        self.distUuid = distUuid
+    }
+}
+
