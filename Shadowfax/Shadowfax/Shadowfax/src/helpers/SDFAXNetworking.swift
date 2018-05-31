@@ -97,11 +97,10 @@ extension SDFAXNetworking {
         })
     }
 
-    func sendTo(phone: String, message: String) {
+    func sendTo(phone: String, message: String, id: UInt64) {
         getUUID(phone: phone) { [unowned self] (uuid) in
-            self.getAddress(uuid: uuid, { [unowned self] (address) in
-                // FIXME
-                self.chatNetwork.startListening()
+            self.getAddress(uuid: uuid, { [unowned self] (address) in // gRPC method called here
+                self.chatNetwork.sendTo(address: address, msg: message, id: id) // socket method called here
                 // self.sendTo(address: address)
             })
         }
