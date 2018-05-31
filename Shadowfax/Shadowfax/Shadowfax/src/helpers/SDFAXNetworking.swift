@@ -73,7 +73,7 @@ extension SDFAXNetworking {
         try! imladrisService?.sendTo(request, completion: { (reply, result) in
             Logger.info(message: "gRPC SendTo get reply: \(String(describing: reply)), \(String(describing: result))")
             if let reply = reply {
-                completion(HostAddress().set(ip: reply.distIp, port: UInt16(reply.distPort)!))
+                completion(HostAddress().set(ip: reply.distIp, port: Int(reply.distPort)!))
             } else {
                 Logger.warning(message: "User with UUID: \(request.distUuid)'s Address not found.")
             }
@@ -128,7 +128,7 @@ extension SDFAXNetworking {
 class HostAddress: Object {
 
     typealias Phone = String
-    typealias Port = UInt16
+    typealias Port = Int
     typealias IP = String
 
     @objc dynamic var ip: IP = ""

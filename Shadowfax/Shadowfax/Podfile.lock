@@ -5,9 +5,6 @@ PODS:
   - BoringSSL/Implementation (10.0.2):
     - BoringSSL/Interface (= 10.0.2)
   - BoringSSL/Interface (10.0.2)
-  - Chatto (3.3.1)
-  - ChattoAdditions (3.3.1):
-    - Chatto
   - CocoaAsyncSocket (7.6.3)
   - CryptoSwift (0.9.0)
   - gRPC-Core (1.11.0):
@@ -18,6 +15,10 @@ PODS:
     - gRPC-Core/Interface (= 1.11.0)
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.11.0)
+  - JGProgressHUD (2.0.3)
+  - Kingfisher (4.8.0)
+  - LayoutKit (7.0.3)
+  - MessageListener (1.0.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -28,6 +29,9 @@ PODS:
   - Realm/Headers (3.5.0)
   - RealmSwift (3.5.0):
     - Realm (= 3.5.0)
+  - RxCocoa (4.1.2):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.1.2)
   - Starscream (3.0.5)
   - SwiftGRPC (0.4.3):
     - BoringSSL (~> 10.0)
@@ -37,48 +41,72 @@ PODS:
   - SwiftyRSA (1.4.0):
     - SwiftyRSA/ObjC (= 1.4.0)
   - SwiftyRSA/ObjC (1.4.0)
+  - Tactile (2.0)
+  - TanImagePicker (0.2.4)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
-  - Chatto (= 3.3.1)
-  - ChattoAdditions (= 3.3.1)
-  - CocoaAsyncSocket
+  - CocoaAsyncSocket (~> 7.6.3)
   - CryptoSwift (~> 0.9.0)
+  - JGProgressHUD
+  - Kingfisher
+  - LayoutKit
+  - MessageListener
   - RealmSwift (~> 3.5.0)
+  - RxCocoa
+  - RxSwift
   - Starscream (~> 3.0.2)
   - SwiftGRPC (~> 0.4.3)
   - SwiftyRSA (~> 1.4.0)
+  - Tactile
+  - TanImagePicker
+  - YYText
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - BoringSSL
-    - Chatto
-    - ChattoAdditions
     - CocoaAsyncSocket
     - CryptoSwift
     - gRPC-Core
+    - JGProgressHUD
+    - Kingfisher
+    - LayoutKit
+    - MessageListener
     - nanopb
     - Realm
     - RealmSwift
+    - RxCocoa
+    - RxSwift
     - Starscream
     - SwiftGRPC
     - SwiftProtobuf
     - SwiftyRSA
+    - Tactile
+    - TanImagePicker
+    - YYText
 
 SPEC CHECKSUMS:
   BoringSSL: 60dd24df4af296bf41d78e5841dbb95d75f88c0d
-  Chatto: 24a6c9b0c91b08130466888b8b61563b90191c6f
-  ChattoAdditions: cc74cd3dd371aa3f70e5ab8568a4f383f0c0eb8c
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   CryptoSwift: bca8c5b653dcc2d9734409242a070ff53bafac86
   gRPC-Core: 164639cd8ae18ca8b65477fafb2efbaecf4f181a
+  JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
+  Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
+  LayoutKit: 5116e931d7ec963c3d5d2bf8b87040068a31b461
+  MessageListener: 03a08e08927aaa5f4191fbb53e8624fd95c31285
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
   RealmSwift: 3322562622fda2ad596985ead4d8d8be30cf838c
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
   Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
   SwiftGRPC: e582ede5791867075513a3757faa41be215b7e5a
   SwiftProtobuf: 5ccc0e4054e37c75800e5744acb2aa80bb72b39c
   SwiftyRSA: 601e4585fece2c6c50ae93a67c77cc2426e55cb2
+  Tactile: 22d5686693be17568351b95aa83ef37457cd40f4
+  TanImagePicker: 88ce20ed587e7b0ec05b71f1afaf0edb76bf5a1b
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: a2720d5154ed6957088f17d5e8041f8c67cf51bc
+PODFILE CHECKSUM: 1db2cba6027ade3d1951722d44bd02638b9afa99
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

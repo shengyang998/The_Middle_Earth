@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 
 class Contact: Object {
-
     @objc dynamic var uuid = ""
     @objc dynamic var phone = ""
     @objc dynamic var firstName = ""
@@ -18,7 +17,10 @@ class Contact: Object {
     @objc dynamic var fullName = ""
     @objc dynamic var pinyin = ""
     @objc dynamic var avatarPath = ""
-
+    
+    override static func primaryKey() -> String {
+        return "uuid"
+    }
 }
 
 extension Contact {
@@ -33,5 +35,14 @@ extension Contact {
 
     func syncFullname() {
         self.fullName = "\(self.lastName) \(self.firstName)".trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+
+extension Contact {
+    static func makeTest() -> Contact {
+        let contact = Contact()
+        contact.uuid = "HELLLLLO"
+        contact.fullName = "与生养"
+        return contact
     }
 }

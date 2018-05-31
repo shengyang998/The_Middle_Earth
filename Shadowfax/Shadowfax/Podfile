@@ -6,8 +6,6 @@ target 'Shadowfax' do
   use_frameworks!
 
   # Pods for Shadowfax
-  pod 'Chatto', '= 3.3.1'
-  pod 'ChattoAdditions', '=3.3.1'
   pod 'RealmSwift', '~> 3.5.0'
   # pod 'Moya', '~> 11.0.2'
   pod 'CocoaAsyncSocket', '~> 7.6.3'
@@ -15,5 +13,14 @@ target 'Shadowfax' do
   pod 'Starscream', '~> 3.0.2'
   pod 'SwiftyRSA', '~> 1.4.0'
   pod 'CryptoSwift', '~> 0.9.0'
+  pod 'LayoutKit'
+  pod 'Kingfisher'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'TanImagePicker'
+  pod 'YYText'
+  pod 'JGProgressHUD'
+  pod 'MessageListener'
+  pod 'Tactile'
 
 end
