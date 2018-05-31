@@ -10,6 +10,7 @@ import Foundation
 import SwiftyRSA
 import CryptoSwift
 import CocoaAsyncSocket
+import SwiftProtobuf
 
 fileprivate enum ChatNetworkingTags: Int {
     case initiativeHandShakeHeaderTag = 100,
@@ -60,12 +61,13 @@ class ChatNetworking: NSObject {
     }()
 
     private lazy var AESKey: Array<UInt8> = try! HKDF(password: GlobalConstants.InitialVector).calculate()
-    lazy var iv: Array<UInt8> = try! HKDF(password: GlobalConstants.InitialVector).calculate()
+    private lazy var iv: Array<UInt8> = try! HKDF(password: GlobalConstants.InitialVector).calculate()
     var isSecured: Bool = false
 
     override init() {
         super.init()
         self.startHandShakeListening(onPort: GlobalConstants.clientPort)
+        self.passivelyMakeSecureHandShake()
     }
 }
 
@@ -74,12 +76,14 @@ extension ChatNetworking {
     // MARK: prepare methods
     func prepareSocket(toHost host: String, onPort port: UInt16) {
         prepareUdpSocket(toHost: host, onPort: port)
-        do { try self.socket.connect(toHost: host, onPort: port) }
-        catch { Logger.error(message: "Cannot connect to \(host):\(port)") }
+        if !self.socket.isConnected {
+            do { try self.socket.connect(toHost: host, onPort: port) }
+            catch { Logger.error(message: "Cannot connect to \(host):\(port)") }
+        }
     }
 
     func prepareUdpSocket(toHost host: String, onPort port: UInt16) {
-        if !udpSocket.isConnected() {
+        if !self.udpSocket.isConnected() {
             do {
                 try udpSocket.connect(toHost: host, onPort: port)
                 try udpSocket.send(emptyUDPRequest.serializedData(), withTimeout: standardTimeout, tag: 1)
@@ -102,7 +106,7 @@ extension ChatNetworking {
     }
 
     // MAKR: send or make hand shake methods
-    func initiativlyMakeSecureHandShake(to address: HostAddress) -> Bool {
+    private func initiativlyMakeSecureHandShake(to address: HostAddress) -> Bool {
         // MARK
         // 1. alice.pub                            ->   bob
         // 2. alice                                <-   crypto(bob.AESKey, with: alice.pub) // FIXME: Should not. Because the `bob.AESKey` is unable to verify.
@@ -120,6 +124,7 @@ extension ChatNetworking {
         // 1. already accept on port 52013
         // 2. `did accept new socket` delegate handle rsa pub from bob
         self.socket.readData(toLength: UInt(headerByte), withTimeout: -1, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
+        Logger.info(message: "Waiting to read handshake header")
     }
 
     func sendPUB(to address: HostAddress) {
@@ -129,29 +134,35 @@ extension ChatNetworking {
         self.socket.write(pub, withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeBodyTag.rawValue)
     }
 
-    func sendTo(msg: String, id: UInt64) {
+    func sendTo(address: HostAddress, msg: String, id: UInt64) {
+        self.initiativlyMakeSecureHandShake(to: address)
         // MARK: aes(protobuf(msg))
         if self.isSecured {
-            do {
-                let aes = self.aes
-                var protobufMsgSend = SDFAXmsgSend()
-                protobufMsgSend.payload = msg
-                protobufMsgSend.id = id
-                protobufMsgSend.time = Date().ticks
-                let data = try protobufMsgSend.serializedData()
+            let protobufMsgSend = SDFAXmsgSend(id: id,
+                                               payload: msg,
+                                               time: Date().ticks)
 
-                let encryptedData: [UInt8] = try aes!.encrypt(Array(data))
+            let encryptedData = self.encryptProtobufObject(obj: protobufMsgSend, aes: self.aes!)!
+            Logger.debug(message: "Data Encrypted: \(encryptedData)")
 
-                Logger.debug(message: "Data Encrypted: \(encryptedData)")
-
-                let bodyLength = encryptedData.count
-                self.socket.write(Data(from: HeaderLength(bodyLength)), withTimeout: standardTimeout, tag: ChatNetworkingTags.chatHeaderTag.rawValue)
-                self.socket.write(Data(from: encryptedData), withTimeout: standardTimeout, tag: ChatNetworkingTags.chatBodyTag.rawValue)
-            } catch {
-                Logger.severe(message: "Send msg failed with error: \(error)")
-            }
+            let bodyLength = encryptedData.count
+            self.socket.write(Data(from: HeaderLength(bodyLength)), withTimeout: standardTimeout, tag: ChatNetworkingTags.chatHeaderTag.rawValue)
+            self.socket.write(Data(from: encryptedData), withTimeout: standardTimeout, tag: ChatNetworkingTags.chatBodyTag.rawValue)
         } else {
             Logger.warning(message: "The line is not secured!")
+        }
+    }
+
+    private func encryptProtobufObject(obj: SwiftProtobuf.Message, aes: AES) -> [UInt8]? {
+        let aes = self.aes
+        do {
+            let data = try obj.serializedData()
+            let encryptedData: [UInt8] = try aes!.encrypt(Array(data))
+            return encryptedData
+        }
+        catch {
+            Logger.error(message: "Parse Protobuf Objecti to Data Failed!")
+            return nil
         }
     }
 
