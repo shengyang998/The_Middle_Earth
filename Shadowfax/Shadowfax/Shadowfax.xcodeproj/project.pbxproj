@@ -13,6 +13,10 @@
 		097CBDE320B8EAEA0082A32F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097CBDE220B8EAEA0082A32F /* AppDelegate.swift */; };
 		097CBDEA20B8EAEA0082A32F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 097CBDE820B8EAEA0082A32F /* Main.storyboard */; };
 		097CBDEF20B8EAF70082A32F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 097CBDED20B8EAF70082A32F /* LaunchScreen.storyboard */; };
+		0982027120BF05E80074523B /* ChatDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982027020BF05E80074523B /* ChatDetail.swift */; };
+		0982027320BF061E0074523B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982027220BF061E0074523B /* Message.swift */; };
+		0982027520BF06AE0074523B /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982027420BF06AE0074523B /* Contact.swift */; };
+		0982027720BFD1550074523B /* DBConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982027620BFD1550074523B /* DBConnection.swift */; };
 		09C34DE520BAC32B0095240B /* SDFAXNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C34DE420BAC32B0095240B /* SDFAXNetworking.swift */; };
 		09C34DEB20BAE7470095240B /* valinor.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09C34DE720BAE7470095240B /* valinor.crt */; };
 		09C34DEC20BAE7470095240B /* gondor.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09C34DE820BAE7470095240B /* gondor.crt */; };
@@ -66,6 +70,10 @@
 		097CBDE920B8EAEA0082A32F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		097CBDEE20B8EAF70082A32F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		097CBDF020B8EAF70082A32F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0982027020BF05E80074523B /* ChatDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetail.swift; sourceTree = "<group>"; };
+		0982027220BF061E0074523B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		0982027420BF06AE0074523B /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		0982027620BFD1550074523B /* DBConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBConnection.swift; sourceTree = "<group>"; };
 		09C34DE420BAC32B0095240B /* SDFAXNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDFAXNetworking.swift; sourceTree = "<group>"; };
 		09C34DE720BAE7470095240B /* valinor.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = valinor.crt; sourceTree = "<group>"; };
 		09C34DE820BAE7470095240B /* gondor.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gondor.crt; sourceTree = "<group>"; };
@@ -154,6 +162,16 @@
 			path = Shadowfax;
 			sourceTree = "<group>";
 		};
+		0982026F20BF05D50074523B /* models */ = {
+			isa = PBXGroup;
+			children = (
+				0982027020BF05E80074523B /* ChatDetail.swift */,
+				0982027220BF061E0074523B /* Message.swift */,
+				0982027420BF06AE0074523B /* Contact.swift */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
 		09C34DE620BAE7470095240B /* crts */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +186,7 @@
 		09F8840020B987E900884A03 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				0982026F20BF05D50074523B /* models */,
 				09F8844B20B9885400884A03 /* protos */,
 				09F8844120B987FE00884A03 /* helpers */,
 				09F8840220B987E900884A03 /* chatto */,
@@ -273,6 +292,7 @@
 				093BEB9D20B9B63000CEF4BA /* Helpers.swift */,
 				093BEB9F20B9B64800CEF4BA /* GlobalConstants.swift */,
 				09C34DE420BAC32B0095240B /* SDFAXNetworking.swift */,
+				0982027620BFD1550074523B /* DBConnection.swift */,
 				09C34DF520BD38820095240B /* ChatNetworking.swift */,
 				09C34DEF20BAF16F0095240B /* SDFAXDB.swift */,
 				09C34DF120BB91530095240B /* SDFAXServer.swift */,
@@ -450,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				093BEB9C20B9A71400CEF4BA /* Logger.swift in Sources */,
+				0982027120BF05E80074523B /* ChatDetail.swift in Sources */,
 				09C34DF420BB97650095240B /* SDFAXClient.swift in Sources */,
 				09F8843420B987E900884A03 /* DemoPhotoMessageViewModel.swift in Sources */,
 				09F8843520B987E900884A03 /* DemoPhotoMessageModel.swift in Sources */,
@@ -459,6 +480,7 @@
 				09F8842520B987E900884A03 /* WXImageCompress.swift in Sources */,
 				09F8842B20B987E900884A03 /* DemoChatViewController.swift in Sources */,
 				09F8843F20B987E900884A03 /* SlidingDatasSource.swift in Sources */,
+				0982027520BF06AE0074523B /* Contact.swift in Sources */,
 				097CBDE320B8EAEA0082A32F /* AppDelegate.swift in Sources */,
 				09F8842F20B987E900884A03 /* MessagesSelectionChatViewController.swift in Sources */,
 				09F8842D20B987E900884A03 /* DemoChatDataSource.swift in Sources */,
@@ -480,11 +502,13 @@
 				09F8843220B987E900884A03 /* TimeSeparatorCollectionViewCell.swift in Sources */,
 				09F8843120B987E900884A03 /* TimeSeparatorPresenter.swift in Sources */,
 				09F8842C20B987E900884A03 /* DemoChatItemsDecorator.swift in Sources */,
+				0982027720BFD1550074523B /* DBConnection.swift in Sources */,
 				09F8844020B987E900884A03 /* ChatExamplesViewController.swift in Sources */,
 				09F8843A20B987E900884A03 /* DemoTextMessageModel.swift in Sources */,
 				093BEB9E20B9B63000CEF4BA /* Helpers.swift in Sources */,
 				09F8843D20B987E900884A03 /* BaseMessageHandler.swift in Sources */,
 				09F8843020B987E900884A03 /* TimeSeparatorModel.swift in Sources */,
+				0982027320BF061E0074523B /* Message.swift in Sources */,
 				09F8843B20B987E900884A03 /* DemoTextMessageHandler.swift in Sources */,
 				09F8843720B987E900884A03 /* SendingStatusPresenter.swift in Sources */,
 			);
@@ -635,7 +659,10 @@
 				DEVELOPMENT_TEAM = N7VVB6PWZS;
 				INFOPLIST_FILE = Shadowfax/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = self.ysy.Shadowfax;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -652,7 +679,10 @@
 				DEVELOPMENT_TEAM = N7VVB6PWZS;
 				INFOPLIST_FILE = Shadowfax/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = self.ysy.Shadowfax;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
