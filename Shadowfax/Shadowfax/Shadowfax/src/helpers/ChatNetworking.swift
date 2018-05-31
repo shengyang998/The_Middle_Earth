@@ -22,17 +22,12 @@ fileprivate enum ChatNetworkingTags: Int {
     passiveHandShakeBodyTag
 }
 
-fileprivate enum ChatNetworkingLength: UInt {
-    case headerLength = 8
-}
-
 // MARK: constants
 let standardTimeout = GlobalConstants.standardTimeout
-let headerByte = 8
+let headerByte: UInt = 8
 
 // MARK: typealiases
 typealias HeaderLength = UInt64
-
 
 class ChatNetworking: NSObject {
 
@@ -50,6 +45,7 @@ class ChatNetworking: NSObject {
     }
 
     private lazy var queue = DispatchQueue(label: "self.ysy.Shadowfax.\(self)", qos: .utility)
+    private lazy var dispatchGroup = DispatchGroup()
 
     private lazy var socket: GCDAsyncSocket = GCDAsyncSocket(delegate: self, delegateQueue: self.queue)
     private lazy var udpSocket: GCDAsyncUdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: self.queue)
@@ -111,9 +107,12 @@ extension ChatNetworking {
         // 1. alice.pub                            ->   bob
         // 2. alice                                <-   crypto(bob.AESKey, with: alice.pub) // FIXME: Should not. Because the `bob.AESKey` is unable to verify.
         // 3. crypto(alice.AESKey, with: bob.pub)  ->   bob
+        dispatchGroup.enter()
         prepareSocket(toHost: address.ip, onPort: address.port)
-        sendPUB(to: address)
-        self.socket.readData(toLength: ChatNetworkingLength.headerLength.rawValue, withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeHeaderTag.rawValue)
+        if self.isSecured == false {
+            sendPUB(to: address)
+            self.socket.readData(toLength: headerByte, withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeHeaderTag.rawValue)
+        }
         // now delegate to handle bob's AESKey
 
         return true
@@ -123,8 +122,13 @@ extension ChatNetworking {
     func passivelyMakeSecureHandShake() {
         // 1. already accept on port 52013
         // 2. `did accept new socket` delegate handle rsa pub from bob
-        self.socket.readData(toLength: UInt(headerByte), withTimeout: -1, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
-        Logger.info(message: "Waiting to read handshake header")
+        if self.isSecured == false {
+            self.socket.readData(toLength: headerByte, withTimeout: -1, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
+            Logger.info(message: "Waiting to read handshake header")
+        } else {
+            self.socket.readData(toLength: headerByte, withTimeout: -1, tag: ChatNetworkingTags.chatHeaderTag.rawValue)
+            Logger.info(message: "Waiting for message header to come")
+        }
     }
 
     func sendPUB(to address: HostAddress) {
@@ -136,6 +140,7 @@ extension ChatNetworking {
 
     func sendTo(address: HostAddress, msg: String, id: UInt64) {
         self.initiativlyMakeSecureHandShake(to: address)
+        dispatchGroup.wait()
         // MARK: aes(protobuf(msg))
         if self.isSecured {
             let protobufMsgSend = SDFAXmsgSend(id: id,
@@ -227,6 +232,7 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
         case ChatNetworkingTags.initiativeHandShakeBodyTag.rawValue:
             self.AESKey = getAESKey(encryptedData: data)!
             self.isSecured = true
+            dispatchGroup.leave()
 
         // MARK: chat header : body length
         case ChatNetworkingTags.chatHeaderTag.rawValue:
@@ -241,13 +247,29 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
 
         // MARK: chat msgSend : encrypted msgSend
         case ChatNetworkingTags.chatBodyTag.rawValue:
-            let decryptedMessage = getDecryptedMessage(encryptedData: data)
+            let decryptedMessage = getDecryptedMessage(encryptedData: data)!
             // MARK: Realm invoke! DataSource invoke!
+            var msg = Message.set(id: Int(decryptedMessage.id),
+                              payload: decryptedMessage.payload,
+                              time: Date(ticks: decryptedMessage.time),
+                              type: Int(decryptedMessage.type))
+            let db = DBConnection.db
+            try! db.write {
+                db.add(msg, update: false)
+            }
+            
 
         // MARK: chat msgRecv : encrypted msgRecv
         case ChatNetworkingTags.chatRecvBodyTag.rawValue:
-            let decryptedRecv = getDecryptedRecv(encryptedData: data)
+            let decryptedRecv = getDecryptedRecv(encryptedData: data)!
             // MARK: Realm invoke! DataSource invoke!
+            let db = DBConnection.db
+            var msg = db.object(ofType: Message.self, forPrimaryKey: Int(decryptedRecv.id))!
+            msg.isread = decryptedRecv.isread
+            try! db.write {
+                db.add(msg, update: true)
+            }
+
 
         // MARK: passively handshake header
         case ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue:
