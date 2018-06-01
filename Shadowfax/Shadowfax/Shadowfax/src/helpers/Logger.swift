@@ -46,46 +46,46 @@ class Logger {
     }
 
     @inline(__always)
-    class func debug(message: String) {
+    class func debug(message: String, fileName: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         #if DEBUG
-        if level >= LogEvent.debug {
-            print("\(Date().toString()) \(LogEvent.debug.desc)[\(sourceFileName(filePath: #file))]:\n\(#line) \(#column) \(#function) -> \(message)")
+        if level <= LogEvent.debug {
+            print("\(Date().toString()) \(LogEvent.severe.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
         }
         #endif
     }
 
     @inline(__always)
-    class func info(message: String) {
+    class func info(message: String, fileName: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         #if DEBUG
-        if level >= LogEvent.info {
-            print("\(Date().toString()) \(LogEvent.info.desc)[\(sourceFileName(filePath: #file))]:\n\(#line) \(#column) \(#function) -> \(message)")
+        if level <= LogEvent.info {
+            print("\(Date().toString()) \(LogEvent.severe.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
         }
         #endif
     }
 
     @inline(__always)
-    class func warning(message: String) {
+    class func warning(message: String, fileName: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         #if DEBUG
-        if level >= LogEvent.warning {
-            print("\(Date().toString()) \(LogEvent.warning.desc)[\(sourceFileName(filePath: #file))]:\n\(#line) \(#column) \(#function) -> \(message)")
+        if level <= LogEvent.warning {
+            print("\(Date().toString()) \(LogEvent.severe.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
         }
         #endif
     }
 
     @inline(__always)
-    class func error(message: String) {
+    class func error(message: String, fileName: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         #if DEBUG
-        if level >= LogEvent.error {
-            print("\(Date().toString()) \(LogEvent.error.desc)[\(sourceFileName(filePath: #file))]:\n\(#line) \(#column) \(#function) -> \(message)")
+        if level <= LogEvent.error {
+            print("\(Date().toString()) \(LogEvent.severe.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
         }
         #endif
     }
 
     @inline(__always)
-    class func severe(message: String) {
+    class func severe(message: String, fileName: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         #if DEBUG
-        if level >= LogEvent.severe {
-            print("\(Date().toString()) \(LogEvent.severe.desc)[\(sourceFileName(filePath: #file))]:\n\(#line) \(#column) \(#function) -> \(message)")
+        if level <= LogEvent.severe {
+            print("\(Date().toString()) \(LogEvent.severe.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
         }
         #endif
     }
@@ -99,7 +99,7 @@ class Logger {
                    funcName: String = #function)
     {
         #if DEBUG
-        if level >= event {
+        if level <= event {
             print("\(Date().toString()) \(event.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
         }
         #endif

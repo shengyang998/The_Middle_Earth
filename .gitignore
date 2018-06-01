@@ -6,6 +6,9 @@
 Shadowfax/Shadowfax/build/
 Shadowfax/Shadowfax/DerivedData/
 
+# TME
+TME/
+
 ## Various settings
 *.pbxuser
 !default.pbxuser
