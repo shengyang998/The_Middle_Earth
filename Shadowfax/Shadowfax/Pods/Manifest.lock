@@ -63,7 +63,7 @@ DEPENDENCIES:
   - YYText
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - BoringSSL
     - CocoaAsyncSocket
     - CryptoSwift
@@ -109,4 +109,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1db2cba6027ade3d1951722d44bd02638b9afa99
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.5.0

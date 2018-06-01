@@ -75,7 +75,7 @@ extension SDFAXNetworking {
             if let reply = reply {
                 completion(HostAddress().set(ip: reply.distIp, port: Int(reply.distPort)!))
             } else {
-                Logger.warning(message: "User with UUID: \(request.distUuid)'s Address not found.")
+                Logger.error(message: "Error: \(result)")
             }
         })
     }
@@ -107,13 +107,14 @@ extension SDFAXNetworking {
     }
 
     private func signal() {
+        Logger.info(message: "Sending Signal...")
         let dispatchGroup = DispatchGroup()
         prepareImladrisService(dispatchGroup)
         var request = SDFAXSignalRequest()
         request.signal = 1
         request.uuid = GlobalConstants.selfUUID
         try! imladrisService?.signal(request, completion: { (reply, result) in
-            Logger.info(message: ("Signal: \(String(describing: reply)), \(String(describing: result))"))
+            Logger.info(message: ("Get Signal Reply: \(String(describing: reply)), \(String(describing: result))"))
         })
     }
 

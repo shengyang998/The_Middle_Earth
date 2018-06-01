@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             realm.add(contact, update: true)
             Message.makeTestMessages(sender: contact).forEach { realm.add($0, update: true) }
         }
+        SDFAXNetworking.sharedInstance.startHearBeats()
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = Main.View()
         window.makeKeyAndVisible()
