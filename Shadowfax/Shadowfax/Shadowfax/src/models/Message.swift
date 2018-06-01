@@ -17,8 +17,15 @@ class Message: Object {
     @objc dynamic var type: Int = 1
     @objc dynamic var isread: Bool = false
     @objc dynamic var sender: Contact?
+    @objc dynamic var isSentBySelf = false
 
-    class func set(id: Int, payload: String, time: Date, type: Int = 0, sender: Contact? = nil, isread: Bool = false) -> Message {
+    class func set(id: Int,
+                   payload: String,
+                   time: Date,
+                   type: Int = 0,
+                   sender: Contact? = nil,
+                   isread: Bool = false,
+                   isSentBySelf: Bool = false) -> Message {
         let msg = Message()
         msg.id = id
         msg.payload = payload
@@ -26,6 +33,7 @@ class Message: Object {
         msg.type = type
         msg.isread = isread
         msg.sender = sender
+        msg.isSentBySelf = isSentBySelf
         return msg
     }
 
@@ -39,12 +47,12 @@ class Message: Object {
 
 }
 
-extension Message {
-    var isSentBySelf: Bool {
-//        return sender?.uuid == GlobalConstants.selfUUID
-        return id % 2 == 0
-    }
-}
+//extension Message {
+//    var isSentBySelf: Bool {
+////        return sender?.uuid == GlobalConstants.selfUUID
+//        return id % 2 == 0
+//    }
+//}
 
 extension Message {
     static func makeTestMessages(sender: Contact?) -> [Message] {

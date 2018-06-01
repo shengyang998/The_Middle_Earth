@@ -19,20 +19,10 @@ class UserAccountStub(object):
         request_serializer=shadowfax__pb2.SignupRequest.SerializeToString,
         response_deserializer=shadowfax__pb2.UserAccountReply.FromString,
         )
-    self.Signin = channel.unary_unary(
-        '/ShadowFax.UserAccount/Signin',
-        request_serializer=shadowfax__pb2.SigninRequest.SerializeToString,
-        response_deserializer=shadowfax__pb2.UserAccountReply.FromString,
-        )
     self.ChangePhone = channel.unary_unary(
         '/ShadowFax.UserAccount/ChangePhone',
         request_serializer=shadowfax__pb2.ChangePhoneRequest.SerializeToString,
         response_deserializer=shadowfax__pb2.UserAccountReply.FromString,
-        )
-    self.GetUserUUID = channel.unary_unary(
-        '/ShadowFax.UserAccount/GetUserUUID',
-        request_serializer=shadowfax__pb2.GetUserUUIDRequest.SerializeToString,
-        response_deserializer=shadowfax__pb2.GetUserUUIDReplay.FromString,
         )
 
 
@@ -47,23 +37,9 @@ class UserAccountServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def Signin(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
   def ChangePhone(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def GetUserUUID(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """rpc Signin (SigninRequest) returns (UserAccountReply) {}
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -76,20 +52,10 @@ def add_UserAccountServicer_to_server(servicer, server):
           request_deserializer=shadowfax__pb2.SignupRequest.FromString,
           response_serializer=shadowfax__pb2.UserAccountReply.SerializeToString,
       ),
-      'Signin': grpc.unary_unary_rpc_method_handler(
-          servicer.Signin,
-          request_deserializer=shadowfax__pb2.SigninRequest.FromString,
-          response_serializer=shadowfax__pb2.UserAccountReply.SerializeToString,
-      ),
       'ChangePhone': grpc.unary_unary_rpc_method_handler(
           servicer.ChangePhone,
           request_deserializer=shadowfax__pb2.ChangePhoneRequest.FromString,
           response_serializer=shadowfax__pb2.UserAccountReply.SerializeToString,
-      ),
-      'GetUserUUID': grpc.unary_unary_rpc_method_handler(
-          servicer.GetUserUUID,
-          request_deserializer=shadowfax__pb2.GetUserUUIDRequest.FromString,
-          response_serializer=shadowfax__pb2.GetUserUUIDReplay.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
@@ -98,7 +64,18 @@ def add_UserAccountServicer_to_server(servicer, server):
 
 
 class ImladrisStub(object):
-  """MARK: Imladris
+  """message GetUserUUIDRequest {
+  string uuid = 1;
+  string token = 2;
+  string dist_phone = 3;
+  }
+
+  message GetUserUUIDReplay {
+  int32 status_code = 1;
+  string dist_uuid = 2;
+  }
+
+  MARK: Imladris
   """
 
   def __init__(self, channel):
@@ -112,15 +89,36 @@ class ImladrisStub(object):
         request_serializer=shadowfax__pb2.SendToRequest.SerializeToString,
         response_deserializer=shadowfax__pb2.SendToReply.FromString,
         )
+    self.Signin = channel.unary_unary(
+        '/ShadowFax.Imladris/Signin',
+        request_serializer=shadowfax__pb2.SigninRequest.SerializeToString,
+        response_deserializer=shadowfax__pb2.SigninReply.FromString,
+        )
     self.Signal = channel.unary_unary(
         '/ShadowFax.Imladris/Signal',
         request_serializer=shadowfax__pb2.SignalRequest.SerializeToString,
         response_deserializer=shadowfax__pb2.SignalReply.FromString,
         )
+    self.GetUUID = channel.unary_unary(
+        '/ShadowFax.Imladris/GetUUID',
+        request_serializer=shadowfax__pb2.GetUUIDRequest.SerializeToString,
+        response_deserializer=shadowfax__pb2.GetUUIDReply.FromString,
+        )
 
 
 class ImladrisServicer(object):
-  """MARK: Imladris
+  """message GetUserUUIDRequest {
+  string uuid = 1;
+  string token = 2;
+  string dist_phone = 3;
+  }
+
+  message GetUserUUIDReplay {
+  int32 status_code = 1;
+  string dist_uuid = 2;
+  }
+
+  MARK: Imladris
   """
 
   def SendTo(self, request, context):
@@ -130,11 +128,23 @@ class ImladrisServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Signin(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def Signal(self, request, context):
-    """rpc Signin (SigninRequest) returns (SigninReply){
-    }
-    TODO: Signaling channel
+    """TODO: Signaling channel
     """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetUUID(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -147,10 +157,20 @@ def add_ImladrisServicer_to_server(servicer, server):
           request_deserializer=shadowfax__pb2.SendToRequest.FromString,
           response_serializer=shadowfax__pb2.SendToReply.SerializeToString,
       ),
+      'Signin': grpc.unary_unary_rpc_method_handler(
+          servicer.Signin,
+          request_deserializer=shadowfax__pb2.SigninRequest.FromString,
+          response_serializer=shadowfax__pb2.SigninReply.SerializeToString,
+      ),
       'Signal': grpc.unary_unary_rpc_method_handler(
           servicer.Signal,
           request_deserializer=shadowfax__pb2.SignalRequest.FromString,
           response_serializer=shadowfax__pb2.SignalReply.SerializeToString,
+      ),
+      'GetUUID': grpc.unary_unary_rpc_method_handler(
+          servicer.GetUUID,
+          request_deserializer=shadowfax__pb2.GetUUIDRequest.FromString,
+          response_serializer=shadowfax__pb2.GetUUIDReply.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
@@ -159,15 +179,7 @@ def add_ImladrisServicer_to_server(servicer, server):
 
 
 class ValinorStub(object):
-  """message SigninRequest{
-  string phone = 1;
-  }
-
-  message SigninReply{
-  int32 status_code = 1;
-  }
-
-  MARK: Valinor
+  """MARK: Valinor
   """
 
   def __init__(self, channel):
@@ -184,15 +196,7 @@ class ValinorStub(object):
 
 
 class ValinorServicer(object):
-  """message SigninRequest{
-  string phone = 1;
-  }
-
-  message SigninReply{
-  int32 status_code = 1;
-  }
-
-  MARK: Valinor
+  """MARK: Valinor
   """
 
   def CallRobot(self, request, context):

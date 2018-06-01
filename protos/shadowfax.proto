@@ -9,9 +9,9 @@ package ShadowFax;
 service UserAccount {
     // Gandalf <-> Gondor <-> UserAccount
     rpc Signup (SignupRequest) returns (UserAccountReply) {}
-    rpc Signin (SigninRequest) returns (UserAccountReply) {}
+//    rpc Signin (SigninRequest) returns (UserAccountReply) {}
     rpc ChangePhone (ChangePhoneRequest) returns (UserAccountReply) {}
-    rpc GetUserUUID (GetUserUUIDRequest) returns (GetUserUUIDReplay) {}
+//    rpc GetUserUUID (GetUserUUIDRequest) returns (GetUserUUIDReplay) {}
 }
 
 message SignupRequest {
@@ -20,10 +20,10 @@ message SignupRequest {
     string validation_code = 3;
 }
 
-message SigninRequest {
-    string phone = 1;
-    string validation_code = 2;
-}
+//message SigninRequest {
+//    string phone = 1;
+//    string validation_code = 2;
+//}
 
 message ChangePhoneRequest {
     string uuid = 1;
@@ -38,16 +38,16 @@ message UserAccountReply {
     string token = 3;
 }
 
-message GetUserUUIDRequest {
-    string uuid = 1;
-    string token = 2;
-    string dist_phone = 3;
-}
+//message GetUserUUIDRequest {
+//    string uuid = 1;
+//    string token = 2;
+//    string dist_phone = 3;
+//}
 
-message GetUserUUIDReplay {
-    int32 status_code = 1;
-    string dist_uuid = 2;
-}
+//message GetUserUUIDReplay {
+//    int32 status_code = 1;
+//    string dist_uuid = 2;
+//}
 
 
 //MARK: Imladris
@@ -55,10 +55,12 @@ service Imladris {
     // Gandalf <-> Gondor <-> Imladris
     rpc SendTo (SendToRequest) returns (SendToReply) {
     }
-//    rpc Signin (SigninRequest) returns (SigninReply){
-//    }
+    rpc Signin (SigninRequest) returns (SigninReply){
+    }
     // TODO: Signaling channel
     rpc Signal (SignalRequest) returns (SignalReply){
+    }
+    rpc GetUUID (GetUUIDRequest) returns (GetUUIDReply) {
     }
 }
 
@@ -68,7 +70,7 @@ message SendToRequest {
 }
 
 message SendToReply {
-    string status_code = 1;
+    int32 status_code = 1;
     string dist_ip = 2;  // empty string if none
     string dist_port = 3;// empty string if none
 }
@@ -81,15 +83,27 @@ message SignalRequest {
 
 message SignalReply {
     int32 status_code = 1;
+    string ip = 2;
+    int32 port = 3;
 }
 
-//message SigninRequest{
-//    string phone = 1;
-//}
-//
-//message SigninReply{
-//    int32 status_code = 1;
-//}
+message SigninRequest {
+    string phone = 1;
+    string validationCode = 2;
+}
+
+message SigninReply {
+    int32 status_code = 1;
+}
+
+message GetUUIDRequest {
+    string phone = 1;
+}
+
+message GetUUIDReply {
+    int32 status_code = 1;
+    string uuid = 2;
+}
 
 //MARK: Valinor
 service Valinor {

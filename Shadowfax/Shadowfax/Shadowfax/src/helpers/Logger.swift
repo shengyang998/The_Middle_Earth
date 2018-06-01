@@ -58,7 +58,7 @@ class Logger {
     class func info(message: String, fileName: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         #if DEBUG
         if level <= LogEvent.info {
-            print("\(Date().toString()) \(LogEvent.severe.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
+            print("\(Date().toString()) \(LogEvent.info.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
         }
         #endif
     }
@@ -67,7 +67,7 @@ class Logger {
     class func warning(message: String, fileName: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         #if DEBUG
         if level <= LogEvent.warning {
-            print("\(Date().toString()) \(LogEvent.severe.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
+            print("\(Date().toString()) \(LogEvent.warning.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
         }
         #endif
     }
@@ -76,7 +76,7 @@ class Logger {
     class func error(message: String, fileName: String = #file, line: Int = #line, column: Int = #column, funcName: String = #function) {
         #if DEBUG
         if level <= LogEvent.error {
-            print("\(Date().toString()) \(LogEvent.severe.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
+            print("\(Date().toString()) \(LogEvent.error.desc)[\(sourceFileName(filePath: fileName))]:\n\(line) \(column) \(funcName) -> \(message)")
         }
         #endif
     }

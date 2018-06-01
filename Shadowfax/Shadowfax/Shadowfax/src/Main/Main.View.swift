@@ -14,7 +14,7 @@ extension Main {
     final class View: UIViewController {
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             super.touchesBegan(touches, with: event)
-            guard let contact = SDFAXDB.makeConnection().objects(Contact.self).first else { return }
+            guard let contact = SDFAXDB.makeConnection().objects(Contact.self).last else { return }
             UIApplication.shared.keyWindow?.rootViewController = Chat.View(contact: contact)
         }
     }

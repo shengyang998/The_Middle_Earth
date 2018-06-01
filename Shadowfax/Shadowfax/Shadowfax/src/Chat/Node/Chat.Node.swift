@@ -116,11 +116,11 @@ private extension Chat.Node {
 
 private extension Chat.Node {
     struct UI {
-        var cornerRadius: CGFloat { return 20 }
+        var cornerRadius: CGFloat { return 7 }
         var maxWidth: CGFloat { return UIScreen.main.bounds.width - 3 * horizontalSpacing }
         var maxHeight: CGFloat { return 1.8 * UIScreen.main.bounds.height }
-        var horizontalSpacing: CGFloat { return 26 }
-        var verticalSpacing: CGFloat { return 12 }
+        var horizontalSpacing: CGFloat { return 20 }
+        var verticalSpacing: CGFloat { return 8 }
         func background(isMyOwn: Bool) -> UIColor {
             if isMyOwn {
                 return UIColor(rgb: triple(235))

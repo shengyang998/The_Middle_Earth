@@ -13,20 +13,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         SDFAXDB.migrateDatabase(toVersion: GlobalConstants.databaseVersion)
         let realm = SDFAXDB.makeConnection()!
         try? realm.write {
-            let contact = Contact.makeTest()
+//            let contact = Contact.makeAliceTest()
+            let contact = Contact.makeBobTest()
             realm.add(contact, update: true)
-            Message.makeTestMessages(sender: contact).forEach { realm.add($0, update: true) }
+//            Message.makeTestMessages(sender: contact).forEach { realm.add($0, update: true) }
         }
+
         SDFAXNetworking.sharedInstance.startHearBeats()
+        let ch = SDFAXNetworking.sharedInstance.chatNetwork
+
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = Main.View()
         window.makeKeyAndVisible()
         self.window = window
+
         return true
     }
 

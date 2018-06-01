@@ -43,12 +43,16 @@ class ChatNetworking: NSObject {
             return nil
         }
     }
+    var host = ""
+    var port = UInt16(0)
 
     private lazy var queue = DispatchQueue(label: "self.ysy.Shadowfax.\(self)", qos: .utility)
+    private lazy var queue2 = DispatchQueue(label: "self.ysy.Shadowfax.\(self)", qos: .utility)
     private lazy var dispatchGroup = DispatchGroup()
 
     private lazy var socket: GCDAsyncSocket = GCDAsyncSocket(delegate: self, delegateQueue: self.queue)
-    private lazy var udpSocket: GCDAsyncUdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: self.queue)
+    private lazy var listeningSocket: GCDAsyncSocket = GCDAsyncSocket(delegate: self, delegateQueue: self.queue2)
+    private lazy var udpSocket: GCDAsyncUdpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: self.queue2)
 
     private lazy var emptyUDPRequest: SDFAXEmptyRequestForUDP = {
         var t = SDFAXEmptyRequestForUDP();
@@ -59,6 +63,8 @@ class ChatNetworking: NSObject {
     private lazy var AESKey: Array<UInt8> = try! HKDF(password: GlobalConstants.InitialVector).calculate()
     private lazy var iv: Array<UInt8> = try! HKDF(password: GlobalConstants.InitialVector).calculate()
     var isSecured: Bool = false
+
+//    static let sharedInstance = ChatNetworking()
 
     override init() {
         super.init()
@@ -72,9 +78,11 @@ extension ChatNetworking {
     // MARK: prepare methods
     func prepareSocket(toHost host: String, onPort port: UInt16) {
         prepareUdpSocket(toHost: host, onPort: port)
+        self.host = host
+        self.port = port
         if !self.socket.isConnected {
             do { try self.socket.connect(toHost: host, onPort: port) }
-            catch { Logger.error(message: "Cannot connect to \(host):\(port)") }
+            catch { Logger.error(message: "Cannot connect to \(host):\(port).\nError out: \(error)") }
         }
     }
 
@@ -94,7 +102,8 @@ extension ChatNetworking {
 
     // MARK: start listening methods
     func startHandShakeListening(onPort port: UInt16) {
-        if let _ = try? self.socket.accept(onPort: port) {
+        if let _ = try? self.listeningSocket.accept(onPort: port) {
+            self.listeningSocket.readData(toLength: headerByte, withTimeout: -1, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
             Logger.info(message: "Scoket is listening on port: \(port)")
         } else {
             Logger.warning(message: "Port: \(port) has been occupied.")
@@ -108,10 +117,10 @@ extension ChatNetworking {
         // 2. alice                                <-   crypto(bob.AESKey, with: alice.pub) // FIXME: Should not. Because the `bob.AESKey` is unable to verify.
         // 3. crypto(alice.AESKey, with: bob.pub)  ->   bob
         dispatchGroup.enter()
-        prepareSocket(toHost: address.ip, onPort: UInt16(address.port))
+        prepareSocket(toHost: address.ip, onPort: GlobalConstants.clientPort)
         if self.isSecured == false {
             sendPUB(to: address)
-            self.socket.readData(toLength: headerByte, withTimeout: standardTimeout, tag: ChatNetworkingTags.initiativeHandShakeHeaderTag.rawValue)
+            self.socket.readData(toLength: headerByte, withTimeout: -1, tag: ChatNetworkingTags.initiativeHandShakeHeaderTag.rawValue)
         }
         // now delegate to handle bob's AESKey
 
@@ -233,6 +242,7 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
             self.AESKey = getAESKey(encryptedData: data)!
             self.isSecured = true
             dispatchGroup.leave()
+            Logger.info(message: "Customized SSL Handshake is completed.")
 
         // MARK: chat header : body length
         case ChatNetworkingTags.chatHeaderTag.rawValue:
@@ -253,7 +263,7 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
                               payload: decryptedMessage.payload,
                               time: Date(ticks: decryptedMessage.time),
                               type: Int(decryptedMessage.type))
-            let db = DBConnection.db
+            let db = SDFAXDB.makeConnection()!
             try! db.write {
                 db.add(msg, update: false)
             }
@@ -263,7 +273,7 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
         case ChatNetworkingTags.chatRecvBodyTag.rawValue:
             let decryptedRecv = getDecryptedRecv(encryptedData: data)!
             // MARK: Realm invoke! DataSource invoke!
-            let db = DBConnection.db
+            let db = SDFAXDB.makeConnection()!
             var msg = db.object(ofType: Message.self, forPrimaryKey: Int(decryptedRecv.id))!
             msg.isread = decryptedRecv.isread
             try! db.write {
@@ -303,8 +313,17 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
         Logger.info(message: "did connect to: \(url)")
     }
 
+    func socket(_ sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
+        Logger.info(message: "did connect to \(host) : \(port)")
+    }
+
     func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
         Logger.info(message: "did disconnect with error: \(String(describing: err))")
+        do {
+            prepareSocket(toHost: self.host, onPort: self.port)
+            sleep(10)
+        }
+        catch { Logger.error(message: "Cannot re connect to \(host) : \(port)") }
     }
 
 }

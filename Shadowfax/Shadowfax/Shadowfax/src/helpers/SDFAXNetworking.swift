@@ -39,10 +39,10 @@ extension SDFAXNetworking {
         guard let _ = self.imladrisService else {
             dispatchGroup?.enter()
             utilityDispatchQueue.async { [unowned self] in
-//                self.imladrisService = SDFAXImladrisServiceClient(address: GlobalConstants.imladrisAddress)
                 let certURL = Bundle.main.url(forResource: "imladris", withExtension: "crt")!
                 let cert = try! String(contentsOf: certURL)
-                self.imladrisService = SDFAXImladrisServiceClient(address: GlobalConstants.imladrisAddress, certificates: cert)
+//                self.imladrisService = SDFAXImladrisServiceClient(address: GlobalConstants.imladrisAddress, certificates: cert)
+                self.imladrisService = SDFAXImladrisServiceClient(address: GlobalConstants.imladrisAddress, secure: false)
                 dispatchGroup?.leave()
             }
             return
@@ -53,14 +53,30 @@ extension SDFAXNetworking {
         guard let _ = self.userAccountService else {
             dispatchGroup?.enter()
             utilityDispatchQueue.async { [unowned self] in
-//                self.userAccountService = SDFAXUserAccountServiceClient(address: GlobalConstants.gondorAddress)
                 let certURL = Bundle.main.url(forResource: "gondor", withExtension: "crt")!
                 let cert = try! String(contentsOf: certURL)
-                self.userAccountService = SDFAXUserAccountServiceClient(address: GlobalConstants.gondorAddress, certificates: cert)
+//                self.userAccountService = SDFAXUserAccountServiceClient(address: GlobalConstants.gondorAddress, certificates: cert)
+                self.userAccountService = SDFAXUserAccountServiceClient(address: GlobalConstants.gondorAddress, secure: false)
                 dispatchGroup?.leave()
             }
             return
         }
+    }
+
+    func signin(phone: String, validationCode: String, _ completion: @escaping (() -> Void)) {
+        let dispatchGroup = DispatchGroup()
+        prepareImladrisService(dispatchGroup)
+        var request = SDFAXSigninRequest()
+        request.phone = phone
+        request.validationCode = validationCode
+        dispatchGroup.wait()
+        try! imladrisService?.signin(request, completion: { (reply, result) in
+            if let reply = reply {
+                Logger.debug(message: "gRPC Signin get reply: \(String(describing: reply)), \(String(describing: result))")
+            } else {
+                Logger.debug(message: "gRPC Signin result: \(result)")
+            }
+        })
     }
 
     func getAddress(uuid: String, _ completion: @escaping ((HostAddress) -> Void)) {
@@ -73,37 +89,61 @@ extension SDFAXNetworking {
         try! imladrisService?.sendTo(request, completion: { (reply, result) in
             Logger.info(message: "gRPC SendTo get reply: \(String(describing: reply)), \(String(describing: result))")
             if let reply = reply {
-                completion(HostAddress().set(ip: reply.distIp, port: Int(reply.distPort)!))
+                if reply.statusCode == 200 {
+                    completion(HostAddress().set(ip: reply.distIp, port: Int(reply.distPort)!))
+                } else {
+                    Logger.error(message: "Error with Error Code: \(reply.statusCode)_")
+                }
             } else {
-                Logger.error(message: "Error: \(result)")
+                Logger.error(message: "gRPC SendTo result: \(result)")
             }
         })
     }
 
-    func getUUID(phone: String, completion: @escaping ((_ uuid: String) -> Void)) {
+//    func getUUID(phone: String, _ completion: @escaping ((_ uuid: String) -> Void)) {
+//        let dispatchGroup = DispatchGroup()
+//        prepareUserAccountService(dispatchGroup)
+//        var request = SDFAXGetUserUUIDRequest()
+//        request.uuid = GlobalConstants.selfUUID
+//        request.token = GlobalConstants.selfToken
+//        dispatchGroup.wait()
+//        try! userAccountService?.getUserUUID(request, completion: { (reply, result) in
+//            Logger.info(message: "gRPC GetUserUUID get reply: \(String(describing: reply)), \(String(describing: result))")
+//            if let reply = reply {
+//                completion(reply.uuid)
+//            } else {
+//                Logger.warning(message: "gRPC getUUID result: \(result)")
+//            }
+//        })
+//    }
+
+    func getUUID(phone: String, _ completion: @escaping ((_ uuid: String) -> Void)) {
         let dispatchGroup = DispatchGroup()
-        prepareUserAccountService(dispatchGroup)
-        var request = SDFAXGetUserUUIDRequest()
-        request.uuid = GlobalConstants.selfUUID
-        request.token = GlobalConstants.selfToken
+        prepareImladrisService(dispatchGroup)
+        var request = SDFAXGetUUIDRequest()
+        request.phone = phone
         dispatchGroup.wait()
-        try! userAccountService?.getUserUUID(request, completion: { (reply, result) in
-            Logger.info(message: "gRPC GetUserUUID get reply: \(String(describing: reply)), \(String(describing: result))")
+        try! imladrisService?.getUUID(request, completion: { (reply, result) in
             if let reply = reply {
-                completion(reply.distUuid)
+                Logger.debug(message: "Get GetUUID Reply: \(String(describing: reply))")
+                completion(reply.uuid)
             } else {
-                Logger.warning(message: "User with PhoneNumber: \(phone)'s UUID not found")
+                Logger.warning(message: "gRPC GetUUID result: \(result)")
             }
         })
     }
 
-    func sendTo(phone: String, message: String, id: UInt64) {
-        getUUID(phone: phone) { [unowned self] (uuid) in
-            self.getAddress(uuid: uuid, { [unowned self] (address) in // gRPC method called here
-                self.chatNetwork.sendTo(address: address, msg: message, id: id) // socket method called here
-                // self.sendTo(address: address)
-            })
+    func sendTo(uuid: String, message: String, id: UInt64) {
+        self.getAddress(uuid: uuid) { (address) in
+            self.chatNetwork.sendTo(address: address, msg: message, id: id)
         }
+//        getUUID(phone: phone) { [unowned self] (uuid) in
+//            self.getAddress(uuid: uuid, { [unowned self] (address) in // gRPC method called here
+//                self.chatNetwork.sendTo(address: address, msg: message, id: id) // socket method called here
+//                // TODO
+//                // self.sendTo(address: address)
+//            })
+//        }
     }
 
     private func signal() {
@@ -111,15 +151,21 @@ extension SDFAXNetworking {
         let dispatchGroup = DispatchGroup()
         prepareImladrisService(dispatchGroup)
         var request = SDFAXSignalRequest()
-        request.signal = 1
         request.uuid = GlobalConstants.selfUUID
-        try! imladrisService?.signal(request, completion: { (reply, result) in
+        try! imladrisService?.signal(request, completion: { [unowned self] (reply, result) in
             Logger.info(message: ("Get Signal Reply: \(String(describing: reply)), \(String(describing: result))"))
+            if let reply = reply {
+                if reply.ip != "", reply.port != 0 {
+                    self.chatNetwork.prepareUdpSocket(toHost: reply.ip, onPort: UInt16(reply.port))
+                }
+            } else {
+                Logger.warning(message: "gRPC Signal result: \(result)")
+            }
         })
     }
 
     func startHearBeats() {
-        Timer.init(fire: Date(), interval: GlobalConstants.standardHearBeatsTimeInterval, repeats: true) { [unowned self] (_) in
+        Timer.scheduledTimer(withTimeInterval: GlobalConstants.standardHearBeatsTimeInterval, repeats: true) { [unowned self] (_) in
             self.signal()
         }
     }

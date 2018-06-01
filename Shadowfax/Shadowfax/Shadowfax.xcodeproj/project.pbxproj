@@ -14,7 +14,6 @@
 		097CBDEF20B8EAF70082A32F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 097CBDED20B8EAF70082A32F /* LaunchScreen.storyboard */; };
 		0982027320BF061E0074523B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982027220BF061E0074523B /* Message.swift */; };
 		0982027520BF06AE0074523B /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982027420BF06AE0074523B /* Contact.swift */; };
-		0982027720BFD1550074523B /* DBConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0982027620BFD1550074523B /* DBConnection.swift */; };
 		09C34DE520BAC32B0095240B /* SDFAXNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C34DE420BAC32B0095240B /* SDFAXNetworking.swift */; };
 		09C34DEB20BAE7470095240B /* valinor.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09C34DE720BAE7470095240B /* valinor.crt */; };
 		09C34DEC20BAE7470095240B /* gondor.crt in Resources */ = {isa = PBXBuildFile; fileRef = 09C34DE820BAE7470095240B /* gondor.crt */; };
@@ -86,7 +85,6 @@
 		097CBDF020B8EAF70082A32F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0982027220BF061E0074523B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0982027420BF06AE0074523B /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		0982027620BFD1550074523B /* DBConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBConnection.swift; sourceTree = "<group>"; };
 		09C34DE420BAC32B0095240B /* SDFAXNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDFAXNetworking.swift; sourceTree = "<group>"; };
 		09C34DE720BAE7470095240B /* valinor.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = valinor.crt; sourceTree = "<group>"; };
 		09C34DE820BAE7470095240B /* gondor.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = gondor.crt; sourceTree = "<group>"; };
@@ -235,7 +233,6 @@
 				093BEB9F20B9B64800CEF4BA /* GlobalConstants.swift */,
 				09C34DE420BAC32B0095240B /* SDFAXNetworking.swift */,
 				09C34DF520BD38820095240B /* ChatNetworking.swift */,
-				0982027620BFD1550074523B /* DBConnection.swift */,
 				09C34DEF20BAF16F0095240B /* SDFAXDB.swift */,
 				09C34DF120BB91530095240B /* SDFAXServer.swift */,
 				09C34DF320BB97650095240B /* SDFAXClient.swift */,
@@ -589,7 +586,6 @@
 				BACC88F020BFF4D600363466 /* AvatarView.swift in Sources */,
 				BACC887520BFF18600363466 /* Chat.ImagesPickerAdapter.swift in Sources */,
 				BACC888220BFF18600363466 /* Chat.ContentView.swift in Sources */,
-				0982027720BFD1550074523B /* DBConnection.swift in Sources */,
 				BACC88DF20BFF4D600363466 /* Date.swift in Sources */,
 				093BEB9E20B9B63000CEF4BA /* Helpers.swift in Sources */,
 				0982027320BF061E0074523B /* Message.swift in Sources */,

@@ -58,13 +58,27 @@ def ping(context):
     pass
 
 
-def lovely_signal(sig, context):
+def lovely_signal(sig, uuid, context):
+    ip, port = get_ip_port_from_grpc_context(context)
+    db = DatabaseConfiguration.get_db()
+    db.setex(uuid, conf.SIGNIN_EXPIRE_TIME, {'ip': ip, 'port': port})
+    logger.debug("Address of uuid: {0} is {1}:{2}".format(uuid, ip, port))
     dispatcher = {
         0: ping,
         1: recall_msg
     }
     dispatcher[sig](context)
     return imladris_pb2.SignalReply(status_code=conf.STATUS_OK)
+
+
+def getuuid(phone):
+    db = DatabaseConfiguration.get_db()
+    dist_uuid = db.get(phone)
+    if dist_uuid is None:
+        from uuid import uuid4
+        dist_uuid = str(uuid4())
+        db.set(phone, dist_uuid)
+    return imladris_pb2.GetUUIDReply(status_code=conf.STATUS_OK, uuid=dist_uuid)
 
 
 def sendto(source_uuid, dist_uuid, context):
@@ -84,7 +98,7 @@ class ImladrisServicer(imladris_pb2_grpc.ImladrisServicer):
         dist_uuid = request.dist_uuid
         source_ip, source_port = get_ip_port_from_grpc_context(context)
         # FIXME: how to send msg to objc client
-        logger.info("Sending message from {0} to {1}".format(request.source_phone, request.dist_phone))
+        logger.info("Sending message from {0} to {1}".format(request.source_uuid, request.dist_uuid))
         return sendto(source_uuid, dist_uuid, context)
 
     def Signin(self, request, context):
@@ -94,11 +108,15 @@ class ImladrisServicer(imladris_pb2_grpc.ImladrisServicer):
         db.setex(uuid, conf.SIGNIN_EXPIRE_TIME, {'ip': ip, 'port': port})
 
     def Signal(self, request, context):
-        logger.info("Get Signal: {0}".format(request.signal))
+        logger.debug("Get Signal: {0} from host: {1}".format(request.signal, get_ip_port_from_grpc_context(context)))
         uuid = request.uuid
         signal = request.signal
         msg = request.msg
-        return lovely_signal(signal, context)
+        return lovely_signal(signal, uuid, context)
+
+    def GetUUID(self, request, context):
+        logger.debug("Get UUID request for Phone No.{0}".format(request.phone))
+        return getuuid(request.phone)
 
 
 def start_server(port):

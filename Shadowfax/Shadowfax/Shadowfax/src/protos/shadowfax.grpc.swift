@@ -31,22 +31,10 @@ fileprivate final class SDFAXUserAccountSignupCallBase: ClientCallUnaryBase<SDFA
   override class var method: String { return "/ShadowFax.UserAccount/Signup" }
 }
 
-internal protocol SDFAXUserAccountSigninCall: ClientCallUnary {}
-
-fileprivate final class SDFAXUserAccountSigninCallBase: ClientCallUnaryBase<SDFAXSigninRequest, SDFAXUserAccountReply>, SDFAXUserAccountSigninCall {
-  override class var method: String { return "/ShadowFax.UserAccount/Signin" }
-}
-
 internal protocol SDFAXUserAccountChangePhoneCall: ClientCallUnary {}
 
 fileprivate final class SDFAXUserAccountChangePhoneCallBase: ClientCallUnaryBase<SDFAXChangePhoneRequest, SDFAXUserAccountReply>, SDFAXUserAccountChangePhoneCall {
   override class var method: String { return "/ShadowFax.UserAccount/ChangePhone" }
-}
-
-internal protocol SDFAXUserAccountGetUserUUIDCall: ClientCallUnary {}
-
-fileprivate final class SDFAXUserAccountGetUserUUIDCallBase: ClientCallUnaryBase<SDFAXGetUserUUIDRequest, SDFAXGetUserUUIDReplay>, SDFAXUserAccountGetUserUUIDCall {
-  override class var method: String { return "/ShadowFax.UserAccount/GetUserUUID" }
 }
 
 
@@ -58,19 +46,9 @@ internal protocol SDFAXUserAccountService: ServiceClient {
   func signup(_ request: SDFAXSignupRequest, completion: @escaping (SDFAXUserAccountReply?, CallResult) -> Void) throws -> SDFAXUserAccountSignupCall
 
   /// Synchronous. Unary.
-  func signin(_ request: SDFAXSigninRequest) throws -> SDFAXUserAccountReply
-  /// Asynchronous. Unary.
-  func signin(_ request: SDFAXSigninRequest, completion: @escaping (SDFAXUserAccountReply?, CallResult) -> Void) throws -> SDFAXUserAccountSigninCall
-
-  /// Synchronous. Unary.
   func changePhone(_ request: SDFAXChangePhoneRequest) throws -> SDFAXUserAccountReply
   /// Asynchronous. Unary.
   func changePhone(_ request: SDFAXChangePhoneRequest, completion: @escaping (SDFAXUserAccountReply?, CallResult) -> Void) throws -> SDFAXUserAccountChangePhoneCall
-
-  /// Synchronous. Unary.
-  func getUserUUID(_ request: SDFAXGetUserUUIDRequest) throws -> SDFAXGetUserUUIDReplay
-  /// Asynchronous. Unary.
-  func getUserUUID(_ request: SDFAXGetUserUUIDRequest, completion: @escaping (SDFAXGetUserUUIDReplay?, CallResult) -> Void) throws -> SDFAXUserAccountGetUserUUIDCall
 
 }
 
@@ -87,17 +65,6 @@ internal final class SDFAXUserAccountServiceClient: ServiceClientBase, SDFAXUser
   }
 
   /// Synchronous. Unary.
-  internal func signin(_ request: SDFAXSigninRequest) throws -> SDFAXUserAccountReply {
-    return try SDFAXUserAccountSigninCallBase(channel)
-      .run(request: request, metadata: metadata)
-  }
-  /// Asynchronous. Unary.
-  internal func signin(_ request: SDFAXSigninRequest, completion: @escaping (SDFAXUserAccountReply?, CallResult) -> Void) throws -> SDFAXUserAccountSigninCall {
-    return try SDFAXUserAccountSigninCallBase(channel)
-      .start(request: request, metadata: metadata, completion: completion)
-  }
-
-  /// Synchronous. Unary.
   internal func changePhone(_ request: SDFAXChangePhoneRequest) throws -> SDFAXUserAccountReply {
     return try SDFAXUserAccountChangePhoneCallBase(channel)
       .run(request: request, metadata: metadata)
@@ -108,17 +75,6 @@ internal final class SDFAXUserAccountServiceClient: ServiceClientBase, SDFAXUser
       .start(request: request, metadata: metadata, completion: completion)
   }
 
-  /// Synchronous. Unary.
-  internal func getUserUUID(_ request: SDFAXGetUserUUIDRequest) throws -> SDFAXGetUserUUIDReplay {
-    return try SDFAXUserAccountGetUserUUIDCallBase(channel)
-      .run(request: request, metadata: metadata)
-  }
-  /// Asynchronous. Unary.
-  internal func getUserUUID(_ request: SDFAXGetUserUUIDRequest, completion: @escaping (SDFAXGetUserUUIDReplay?, CallResult) -> Void) throws -> SDFAXUserAccountGetUserUUIDCall {
-    return try SDFAXUserAccountGetUserUUIDCallBase(channel)
-      .start(request: request, metadata: metadata, completion: completion)
-  }
-
 }
 internal protocol SDFAXImladrisSendToCall: ClientCallUnary {}
 
@@ -126,10 +82,22 @@ fileprivate final class SDFAXImladrisSendToCallBase: ClientCallUnaryBase<SDFAXSe
   override class var method: String { return "/ShadowFax.Imladris/SendTo" }
 }
 
+internal protocol SDFAXImladrisSigninCall: ClientCallUnary {}
+
+fileprivate final class SDFAXImladrisSigninCallBase: ClientCallUnaryBase<SDFAXSigninRequest, SDFAXSigninReply>, SDFAXImladrisSigninCall {
+  override class var method: String { return "/ShadowFax.Imladris/Signin" }
+}
+
 internal protocol SDFAXImladrisSignalCall: ClientCallUnary {}
 
 fileprivate final class SDFAXImladrisSignalCallBase: ClientCallUnaryBase<SDFAXSignalRequest, SDFAXSignalReply>, SDFAXImladrisSignalCall {
   override class var method: String { return "/ShadowFax.Imladris/Signal" }
+}
+
+internal protocol SDFAXImladrisGetUUIDCall: ClientCallUnary {}
+
+fileprivate final class SDFAXImladrisGetUUIDCallBase: ClientCallUnaryBase<SDFAXGetUUIDRequest, SDFAXGetUUIDReply>, SDFAXImladrisGetUUIDCall {
+  override class var method: String { return "/ShadowFax.Imladris/GetUUID" }
 }
 
 
@@ -141,9 +109,19 @@ internal protocol SDFAXImladrisService: ServiceClient {
   func sendTo(_ request: SDFAXSendToRequest, completion: @escaping (SDFAXSendToReply?, CallResult) -> Void) throws -> SDFAXImladrisSendToCall
 
   /// Synchronous. Unary.
+  func signin(_ request: SDFAXSigninRequest) throws -> SDFAXSigninReply
+  /// Asynchronous. Unary.
+  func signin(_ request: SDFAXSigninRequest, completion: @escaping (SDFAXSigninReply?, CallResult) -> Void) throws -> SDFAXImladrisSigninCall
+
+  /// Synchronous. Unary.
   func signal(_ request: SDFAXSignalRequest) throws -> SDFAXSignalReply
   /// Asynchronous. Unary.
   func signal(_ request: SDFAXSignalRequest, completion: @escaping (SDFAXSignalReply?, CallResult) -> Void) throws -> SDFAXImladrisSignalCall
+
+  /// Synchronous. Unary.
+  func getUUID(_ request: SDFAXGetUUIDRequest) throws -> SDFAXGetUUIDReply
+  /// Asynchronous. Unary.
+  func getUUID(_ request: SDFAXGetUUIDRequest, completion: @escaping (SDFAXGetUUIDReply?, CallResult) -> Void) throws -> SDFAXImladrisGetUUIDCall
 
 }
 
@@ -160,6 +138,17 @@ internal final class SDFAXImladrisServiceClient: ServiceClientBase, SDFAXImladri
   }
 
   /// Synchronous. Unary.
+  internal func signin(_ request: SDFAXSigninRequest) throws -> SDFAXSigninReply {
+    return try SDFAXImladrisSigninCallBase(channel)
+      .run(request: request, metadata: metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func signin(_ request: SDFAXSigninRequest, completion: @escaping (SDFAXSigninReply?, CallResult) -> Void) throws -> SDFAXImladrisSigninCall {
+    return try SDFAXImladrisSigninCallBase(channel)
+      .start(request: request, metadata: metadata, completion: completion)
+  }
+
+  /// Synchronous. Unary.
   internal func signal(_ request: SDFAXSignalRequest) throws -> SDFAXSignalReply {
     return try SDFAXImladrisSignalCallBase(channel)
       .run(request: request, metadata: metadata)
@@ -167,6 +156,17 @@ internal final class SDFAXImladrisServiceClient: ServiceClientBase, SDFAXImladri
   /// Asynchronous. Unary.
   internal func signal(_ request: SDFAXSignalRequest, completion: @escaping (SDFAXSignalReply?, CallResult) -> Void) throws -> SDFAXImladrisSignalCall {
     return try SDFAXImladrisSignalCallBase(channel)
+      .start(request: request, metadata: metadata, completion: completion)
+  }
+
+  /// Synchronous. Unary.
+  internal func getUUID(_ request: SDFAXGetUUIDRequest) throws -> SDFAXGetUUIDReply {
+    return try SDFAXImladrisGetUUIDCallBase(channel)
+      .run(request: request, metadata: metadata)
+  }
+  /// Asynchronous. Unary.
+  internal func getUUID(_ request: SDFAXGetUUIDRequest, completion: @escaping (SDFAXGetUUIDReply?, CallResult) -> Void) throws -> SDFAXImladrisGetUUIDCall {
+    return try SDFAXImladrisGetUUIDCallBase(channel)
       .start(request: request, metadata: metadata, completion: completion)
   }
 

@@ -16,6 +16,7 @@ extension Chat {
         private let _contact: Contact
         private let _bag = DisposeBag()
         private var _token: NotificationToken?
+        private lazy var _id: Int = (SDFAXDB.makeConnection().objects(Message.self).sorted(byKeyPath: "id").last?.id)!
 
         private(set) lazy var messages = SDFAXDB.makeConnection().objects(Message.self)
         
@@ -47,5 +48,18 @@ extension Chat {
 extension Chat.ViewModel {
     func send(_ text: String) {
         // TODO: Send Test Message
+        self._id += 1
+        SDFAXNetworking.sharedInstance.sendTo(uuid: _contact.uuid, message: text, id: UInt64(self._id))
+        let msg = Message()
+        msg.id = self._id
+        msg.payload = text
+        msg.isSentBySelf = true
+        msg.sender = self._contact
+        msg.time = Date()
+        Logger.info(message: "Send button touched")
+        let db = SDFAXDB.makeConnection()!
+        try! db.write {
+            db.add(msg, update: true)
+        }
     }
 }

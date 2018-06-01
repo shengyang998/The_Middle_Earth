@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='shadowfax.proto',
   package='ShadowFax',
   syntax='proto3',
-  serialized_pb=_b('\n\x0fshadowfax.proto\x12\tShadowFax\"E\n\rSignupRequest\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x03 \x01(\t\"7\n\rSigninRequest\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x02 \x01(\t\"]\n\x12\x43hangePhoneRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\r\n\x05token\x18\x02 \x01(\t\x12\x11\n\tnew_phone\x18\x03 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x04 \x01(\t\"D\n\x10UserAccountReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x0c\n\x04uuid\x18\x02 \x01(\t\x12\r\n\x05token\x18\x03 \x01(\t\"E\n\x12GetUserUUIDRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\r\n\x05token\x18\x02 \x01(\t\x12\x12\n\ndist_phone\x18\x03 \x01(\t\";\n\x11GetUserUUIDReplay\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x11\n\tdist_uuid\x18\x02 \x01(\t\"7\n\rSendToRequest\x12\x13\n\x0bsource_uuid\x18\x01 \x01(\t\x12\x11\n\tdist_uuid\x18\x02 \x01(\t\"F\n\x0bSendToReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\t\x12\x0f\n\x07\x64ist_ip\x18\x02 \x01(\t\x12\x11\n\tdist_port\x18\x03 \x01(\t\":\n\rSignalRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x0e\n\x06signal\x18\x02 \x01(\x05\x12\x0b\n\x03msg\x18\x03 \x01(\t\"\"\n\x0bSignalReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\"/\n\x0eValinorRequest\x12\x10\n\x08robot_id\x18\x01 \x01(\t\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x1b\n\x0cValinorReply\x12\x0b\n\x03msg\x18\x01 \x01(\t\"%\n\x12\x45mptyRequestForUDP\x12\x0f\n\x07nothing\x18\x01 \x01(\x05\"B\n\x07msgSend\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0f\n\x07payload\x18\x02 \x01(\t\x12\x0c\n\x04time\x18\x03 \x01(\x04\x12\x0c\n\x04type\x18\x04 \x01(\x05\"3\n\x07msgRecv\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0e\n\x06isread\x18\x02 \x01(\x08\x12\x0c\n\x04time\x18\x03 \x01(\x04\x32\xae\x02\n\x0bUserAccount\x12\x41\n\x06Signup\x12\x18.ShadowFax.SignupRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x12\x41\n\x06Signin\x12\x18.ShadowFax.SigninRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x12K\n\x0b\x43hangePhone\x12\x1d.ShadowFax.ChangePhoneRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x12L\n\x0bGetUserUUID\x12\x1d.ShadowFax.GetUserUUIDRequest\x1a\x1c.ShadowFax.GetUserUUIDReplay\"\x00\x32\x86\x01\n\x08Imladris\x12<\n\x06SendTo\x12\x18.ShadowFax.SendToRequest\x1a\x16.ShadowFax.SendToReply\"\x00\x12<\n\x06Signal\x12\x18.ShadowFax.SignalRequest\x1a\x16.ShadowFax.SignalReply\"\x00\x32L\n\x07Valinor\x12\x41\n\tCallRobot\x12\x19.ShadowFax.ValinorRequest\x1a\x17.ShadowFax.ValinorReply\"\x00\x42\x10\xa2\x02\x05SDFAX\xba\x02\x05SDFAXb\x06proto3')
+  serialized_pb=_b('\n\x0fshadowfax.proto\x12\tShadowFax\"E\n\rSignupRequest\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x03 \x01(\t\"]\n\x12\x43hangePhoneRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\r\n\x05token\x18\x02 \x01(\t\x12\x11\n\tnew_phone\x18\x03 \x01(\t\x12\x17\n\x0fvalidation_code\x18\x04 \x01(\t\"D\n\x10UserAccountReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x0c\n\x04uuid\x18\x02 \x01(\t\x12\r\n\x05token\x18\x03 \x01(\t\"7\n\rSendToRequest\x12\x13\n\x0bsource_uuid\x18\x01 \x01(\t\x12\x11\n\tdist_uuid\x18\x02 \x01(\t\"F\n\x0bSendToReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x0f\n\x07\x64ist_ip\x18\x02 \x01(\t\x12\x11\n\tdist_port\x18\x03 \x01(\t\":\n\rSignalRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x0e\n\x06signal\x18\x02 \x01(\x05\x12\x0b\n\x03msg\x18\x03 \x01(\t\"<\n\x0bSignalReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"6\n\rSigninRequest\x12\r\n\x05phone\x18\x01 \x01(\t\x12\x16\n\x0evalidationCode\x18\x02 \x01(\t\"\"\n\x0bSigninReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\"\x1f\n\x0eGetUUIDRequest\x12\r\n\x05phone\x18\x01 \x01(\t\"1\n\x0cGetUUIDReply\x12\x13\n\x0bstatus_code\x18\x01 \x01(\x05\x12\x0c\n\x04uuid\x18\x02 \x01(\t\"/\n\x0eValinorRequest\x12\x10\n\x08robot_id\x18\x01 \x01(\t\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x1b\n\x0cValinorReply\x12\x0b\n\x03msg\x18\x01 \x01(\t\"%\n\x12\x45mptyRequestForUDP\x12\x0f\n\x07nothing\x18\x01 \x01(\x05\"B\n\x07msgSend\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0f\n\x07payload\x18\x02 \x01(\t\x12\x0c\n\x04time\x18\x03 \x01(\x04\x12\x0c\n\x04type\x18\x04 \x01(\x05\"3\n\x07msgRecv\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0e\n\x06isread\x18\x02 \x01(\x08\x12\x0c\n\x04time\x18\x03 \x01(\x04\x32\x9d\x01\n\x0bUserAccount\x12\x41\n\x06Signup\x12\x18.ShadowFax.SignupRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x12K\n\x0b\x43hangePhone\x12\x1d.ShadowFax.ChangePhoneRequest\x1a\x1b.ShadowFax.UserAccountReply\"\x00\x32\x85\x02\n\x08Imladris\x12<\n\x06SendTo\x12\x18.ShadowFax.SendToRequest\x1a\x16.ShadowFax.SendToReply\"\x00\x12<\n\x06Signin\x12\x18.ShadowFax.SigninRequest\x1a\x16.ShadowFax.SigninReply\"\x00\x12<\n\x06Signal\x12\x18.ShadowFax.SignalRequest\x1a\x16.ShadowFax.SignalReply\"\x00\x12?\n\x07GetUUID\x12\x19.ShadowFax.GetUUIDRequest\x1a\x17.ShadowFax.GetUUIDReply\"\x00\x32L\n\x07Valinor\x12\x41\n\tCallRobot\x12\x19.ShadowFax.ValinorRequest\x1a\x17.ShadowFax.ValinorReply\"\x00\x42\x10\xa2\x02\x05SDFAX\xba\x02\x05SDFAXb\x06proto3')
 )
 
 
@@ -70,44 +70,6 @@ _SIGNUPREQUEST = _descriptor.Descriptor(
 )
 
 
-_SIGNINREQUEST = _descriptor.Descriptor(
-  name='SigninRequest',
-  full_name='ShadowFax.SigninRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='phone', full_name='ShadowFax.SigninRequest.phone', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='validation_code', full_name='ShadowFax.SigninRequest.validation_code', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=101,
-  serialized_end=156,
-)
-
-
 _CHANGEPHONEREQUEST = _descriptor.Descriptor(
   name='ChangePhoneRequest',
   full_name='ShadowFax.ChangePhoneRequest',
@@ -155,8 +117,8 @@ _CHANGEPHONEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=158,
-  serialized_end=251,
+  serialized_start=101,
+  serialized_end=194,
 )
 
 
@@ -200,91 +162,8 @@ _USERACCOUNTREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=253,
-  serialized_end=321,
-)
-
-
-_GETUSERUUIDREQUEST = _descriptor.Descriptor(
-  name='GetUserUUIDRequest',
-  full_name='ShadowFax.GetUserUUIDRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='uuid', full_name='ShadowFax.GetUserUUIDRequest.uuid', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='token', full_name='ShadowFax.GetUserUUIDRequest.token', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='dist_phone', full_name='ShadowFax.GetUserUUIDRequest.dist_phone', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=323,
-  serialized_end=392,
-)
-
-
-_GETUSERUUIDREPLAY = _descriptor.Descriptor(
-  name='GetUserUUIDReplay',
-  full_name='ShadowFax.GetUserUUIDReplay',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='status_code', full_name='ShadowFax.GetUserUUIDReplay.status_code', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='dist_uuid', full_name='ShadowFax.GetUserUUIDReplay.dist_uuid', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=394,
-  serialized_end=453,
+  serialized_start=196,
+  serialized_end=264,
 )
 
 
@@ -321,8 +200,8 @@ _SENDTOREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=455,
-  serialized_end=510,
+  serialized_start=266,
+  serialized_end=321,
 )
 
 
@@ -335,8 +214,8 @@ _SENDTOREPLY = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='status_code', full_name='ShadowFax.SendToReply.status_code', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
@@ -366,8 +245,8 @@ _SENDTOREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=512,
-  serialized_end=582,
+  serialized_start=323,
+  serialized_end=393,
 )
 
 
@@ -411,8 +290,8 @@ _SIGNALREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=584,
-  serialized_end=642,
+  serialized_start=395,
+  serialized_end=453,
 )
 
 
@@ -430,6 +309,20 @@ _SIGNALREPLY = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='ip', full_name='ShadowFax.SignalReply.ip', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='port', full_name='ShadowFax.SignalReply.port', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -442,8 +335,146 @@ _SIGNALREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=644,
-  serialized_end=678,
+  serialized_start=455,
+  serialized_end=515,
+)
+
+
+_SIGNINREQUEST = _descriptor.Descriptor(
+  name='SigninRequest',
+  full_name='ShadowFax.SigninRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='phone', full_name='ShadowFax.SigninRequest.phone', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='validationCode', full_name='ShadowFax.SigninRequest.validationCode', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=517,
+  serialized_end=571,
+)
+
+
+_SIGNINREPLY = _descriptor.Descriptor(
+  name='SigninReply',
+  full_name='ShadowFax.SigninReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='status_code', full_name='ShadowFax.SigninReply.status_code', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=573,
+  serialized_end=607,
+)
+
+
+_GETUUIDREQUEST = _descriptor.Descriptor(
+  name='GetUUIDRequest',
+  full_name='ShadowFax.GetUUIDRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='phone', full_name='ShadowFax.GetUUIDRequest.phone', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=609,
+  serialized_end=640,
+)
+
+
+_GETUUIDREPLY = _descriptor.Descriptor(
+  name='GetUUIDReply',
+  full_name='ShadowFax.GetUUIDReply',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='status_code', full_name='ShadowFax.GetUUIDReply.status_code', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='uuid', full_name='ShadowFax.GetUUIDReply.uuid', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=642,
+  serialized_end=691,
 )
 
 
@@ -480,8 +511,8 @@ _VALINORREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=680,
-  serialized_end=727,
+  serialized_start=693,
+  serialized_end=740,
 )
 
 
@@ -511,8 +542,8 @@ _VALINORREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=729,
-  serialized_end=756,
+  serialized_start=742,
+  serialized_end=769,
 )
 
 
@@ -542,8 +573,8 @@ _EMPTYREQUESTFORUDP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=758,
-  serialized_end=795,
+  serialized_start=771,
+  serialized_end=808,
 )
 
 
@@ -594,8 +625,8 @@ _MSGSEND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=797,
-  serialized_end=863,
+  serialized_start=810,
+  serialized_end=876,
 )
 
 
@@ -639,20 +670,21 @@ _MSGRECV = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=865,
-  serialized_end=916,
+  serialized_start=878,
+  serialized_end=929,
 )
 
 DESCRIPTOR.message_types_by_name['SignupRequest'] = _SIGNUPREQUEST
-DESCRIPTOR.message_types_by_name['SigninRequest'] = _SIGNINREQUEST
 DESCRIPTOR.message_types_by_name['ChangePhoneRequest'] = _CHANGEPHONEREQUEST
 DESCRIPTOR.message_types_by_name['UserAccountReply'] = _USERACCOUNTREPLY
-DESCRIPTOR.message_types_by_name['GetUserUUIDRequest'] = _GETUSERUUIDREQUEST
-DESCRIPTOR.message_types_by_name['GetUserUUIDReplay'] = _GETUSERUUIDREPLAY
 DESCRIPTOR.message_types_by_name['SendToRequest'] = _SENDTOREQUEST
 DESCRIPTOR.message_types_by_name['SendToReply'] = _SENDTOREPLY
 DESCRIPTOR.message_types_by_name['SignalRequest'] = _SIGNALREQUEST
 DESCRIPTOR.message_types_by_name['SignalReply'] = _SIGNALREPLY
+DESCRIPTOR.message_types_by_name['SigninRequest'] = _SIGNINREQUEST
+DESCRIPTOR.message_types_by_name['SigninReply'] = _SIGNINREPLY
+DESCRIPTOR.message_types_by_name['GetUUIDRequest'] = _GETUUIDREQUEST
+DESCRIPTOR.message_types_by_name['GetUUIDReply'] = _GETUUIDREPLY
 DESCRIPTOR.message_types_by_name['ValinorRequest'] = _VALINORREQUEST
 DESCRIPTOR.message_types_by_name['ValinorReply'] = _VALINORREPLY
 DESCRIPTOR.message_types_by_name['EmptyRequestForUDP'] = _EMPTYREQUESTFORUDP
@@ -667,13 +699,6 @@ SignupRequest = _reflection.GeneratedProtocolMessageType('SignupRequest', (_mess
   ))
 _sym_db.RegisterMessage(SignupRequest)
 
-SigninRequest = _reflection.GeneratedProtocolMessageType('SigninRequest', (_message.Message,), dict(
-  DESCRIPTOR = _SIGNINREQUEST,
-  __module__ = 'shadowfax_pb2'
-  # @@protoc_insertion_point(class_scope:ShadowFax.SigninRequest)
-  ))
-_sym_db.RegisterMessage(SigninRequest)
-
 ChangePhoneRequest = _reflection.GeneratedProtocolMessageType('ChangePhoneRequest', (_message.Message,), dict(
   DESCRIPTOR = _CHANGEPHONEREQUEST,
   __module__ = 'shadowfax_pb2'
@@ -687,20 +712,6 @@ UserAccountReply = _reflection.GeneratedProtocolMessageType('UserAccountReply', 
   # @@protoc_insertion_point(class_scope:ShadowFax.UserAccountReply)
   ))
 _sym_db.RegisterMessage(UserAccountReply)
-
-GetUserUUIDRequest = _reflection.GeneratedProtocolMessageType('GetUserUUIDRequest', (_message.Message,), dict(
-  DESCRIPTOR = _GETUSERUUIDREQUEST,
-  __module__ = 'shadowfax_pb2'
-  # @@protoc_insertion_point(class_scope:ShadowFax.GetUserUUIDRequest)
-  ))
-_sym_db.RegisterMessage(GetUserUUIDRequest)
-
-GetUserUUIDReplay = _reflection.GeneratedProtocolMessageType('GetUserUUIDReplay', (_message.Message,), dict(
-  DESCRIPTOR = _GETUSERUUIDREPLAY,
-  __module__ = 'shadowfax_pb2'
-  # @@protoc_insertion_point(class_scope:ShadowFax.GetUserUUIDReplay)
-  ))
-_sym_db.RegisterMessage(GetUserUUIDReplay)
 
 SendToRequest = _reflection.GeneratedProtocolMessageType('SendToRequest', (_message.Message,), dict(
   DESCRIPTOR = _SENDTOREQUEST,
@@ -729,6 +740,34 @@ SignalReply = _reflection.GeneratedProtocolMessageType('SignalReply', (_message.
   # @@protoc_insertion_point(class_scope:ShadowFax.SignalReply)
   ))
 _sym_db.RegisterMessage(SignalReply)
+
+SigninRequest = _reflection.GeneratedProtocolMessageType('SigninRequest', (_message.Message,), dict(
+  DESCRIPTOR = _SIGNINREQUEST,
+  __module__ = 'shadowfax_pb2'
+  # @@protoc_insertion_point(class_scope:ShadowFax.SigninRequest)
+  ))
+_sym_db.RegisterMessage(SigninRequest)
+
+SigninReply = _reflection.GeneratedProtocolMessageType('SigninReply', (_message.Message,), dict(
+  DESCRIPTOR = _SIGNINREPLY,
+  __module__ = 'shadowfax_pb2'
+  # @@protoc_insertion_point(class_scope:ShadowFax.SigninReply)
+  ))
+_sym_db.RegisterMessage(SigninReply)
+
+GetUUIDRequest = _reflection.GeneratedProtocolMessageType('GetUUIDRequest', (_message.Message,), dict(
+  DESCRIPTOR = _GETUUIDREQUEST,
+  __module__ = 'shadowfax_pb2'
+  # @@protoc_insertion_point(class_scope:ShadowFax.GetUUIDRequest)
+  ))
+_sym_db.RegisterMessage(GetUUIDRequest)
+
+GetUUIDReply = _reflection.GeneratedProtocolMessageType('GetUUIDReply', (_message.Message,), dict(
+  DESCRIPTOR = _GETUUIDREPLY,
+  __module__ = 'shadowfax_pb2'
+  # @@protoc_insertion_point(class_scope:ShadowFax.GetUUIDReply)
+  ))
+_sym_db.RegisterMessage(GetUUIDReply)
 
 ValinorRequest = _reflection.GeneratedProtocolMessageType('ValinorRequest', (_message.Message,), dict(
   DESCRIPTOR = _VALINORREQUEST,
@@ -775,8 +814,8 @@ _USERACCOUNT = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=919,
-  serialized_end=1221,
+  serialized_start=932,
+  serialized_end=1089,
   methods=[
   _descriptor.MethodDescriptor(
     name='Signup',
@@ -788,30 +827,12 @@ _USERACCOUNT = _descriptor.ServiceDescriptor(
     options=None,
   ),
   _descriptor.MethodDescriptor(
-    name='Signin',
-    full_name='ShadowFax.UserAccount.Signin',
-    index=1,
-    containing_service=None,
-    input_type=_SIGNINREQUEST,
-    output_type=_USERACCOUNTREPLY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
     name='ChangePhone',
     full_name='ShadowFax.UserAccount.ChangePhone',
-    index=2,
+    index=1,
     containing_service=None,
     input_type=_CHANGEPHONEREQUEST,
     output_type=_USERACCOUNTREPLY,
-    options=None,
-  ),
-  _descriptor.MethodDescriptor(
-    name='GetUserUUID',
-    full_name='ShadowFax.UserAccount.GetUserUUID',
-    index=3,
-    containing_service=None,
-    input_type=_GETUSERUUIDREQUEST,
-    output_type=_GETUSERUUIDREPLAY,
     options=None,
   ),
 ])
@@ -826,8 +847,8 @@ _IMLADRIS = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   options=None,
-  serialized_start=1224,
-  serialized_end=1358,
+  serialized_start=1092,
+  serialized_end=1353,
   methods=[
   _descriptor.MethodDescriptor(
     name='SendTo',
@@ -839,12 +860,30 @@ _IMLADRIS = _descriptor.ServiceDescriptor(
     options=None,
   ),
   _descriptor.MethodDescriptor(
+    name='Signin',
+    full_name='ShadowFax.Imladris.Signin',
+    index=1,
+    containing_service=None,
+    input_type=_SIGNINREQUEST,
+    output_type=_SIGNINREPLY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
     name='Signal',
     full_name='ShadowFax.Imladris.Signal',
-    index=1,
+    index=2,
     containing_service=None,
     input_type=_SIGNALREQUEST,
     output_type=_SIGNALREPLY,
+    options=None,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetUUID',
+    full_name='ShadowFax.Imladris.GetUUID',
+    index=3,
+    containing_service=None,
+    input_type=_GETUUIDREQUEST,
+    output_type=_GETUUIDREPLY,
     options=None,
   ),
 ])
@@ -859,8 +898,8 @@ _VALINOR = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=2,
   options=None,
-  serialized_start=1360,
-  serialized_end=1436,
+  serialized_start=1355,
+  serialized_end=1431,
   methods=[
   _descriptor.MethodDescriptor(
     name='CallRobot',

@@ -30,7 +30,7 @@ extension Contact {
     }
 
     func syncPinyin() {
-        // MARK: to be continue...
+        // TODO: to be continue...
     }
 
     func syncFullname() {
@@ -39,10 +39,16 @@ extension Contact {
 }
 
 extension Contact {
-    static func makeTest() -> Contact {
+    static func makeAliceTest() -> Contact {
         let contact = Contact()
-        contact.uuid = "HELLLLLO"
-        contact.fullName = "与生养"
+        contact.uuid = "3c817a80-6e93-4b68-9e5c-c5297625405f"
+        contact.fullName = "Bob"
+        return contact
+    }
+    static func makeBobTest() -> Contact {
+        let contact = Contact()
+        contact.uuid = "9f7f6da0-bbb1-4c24-abb3-85e22809983a"
+        contact.fullName = "Alice"
         return contact
     }
 }

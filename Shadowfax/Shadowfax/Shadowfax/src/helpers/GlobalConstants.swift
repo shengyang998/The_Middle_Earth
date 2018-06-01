@@ -12,8 +12,8 @@ import UIKit
 struct GlobalConstants {
 
     // Constants
-    static let databaseVersion: UInt64 = 1
-    static let standardHearBeatsTimeInterval = TimeInterval(150)
+    static let databaseVersion: UInt64 = 2
+    static let standardHearBeatsTimeInterval = TimeInterval(5)
     static let standardTimeout = TimeInterval(30)
     static let InitialVector: Array<UInt8> = Array("FUGCdssIiiusts".utf8)
     static let clientPort: UInt16 = 52013
@@ -24,12 +24,40 @@ struct GlobalConstants {
         set { set(newValue, forKey: isLoginKey) }
     }
 
+    static let phoneKey = "Phone Numbe for this user"
+    static var phoneNumber: String {
+        get {
+            guard let res = UserDefaults.standard.string(forKey: phoneKey) else {
+                let t = ["1", "2", "3", "4", "4", "5", "6", "7", "8", "9", "0"]
+                let r = t.shuffled().joined()
+                Logger.debug(message: "Generated random phone number: \(r)")
+                self.set(r, forKey: phoneKey)
+                return r
+            }
+            Logger.debug(message: "The Phone Number of me is: \(res)")
+            return res
+        }
+        set { set(newValue, forKey: phoneKey) }
+    }
+
     static let uuidKey = "UUID Key For This User"
     static var selfUUID: String {
         get {
             guard let res = UserDefaults.standard.string(forKey: uuidKey) else {
-                Logger.warning(message: "User's UUID not set. Using `default` instead.")
-                return "default"
+                var r = ""
+                let dispatchGroup = DispatchGroup()
+                dispatchGroup.enter()
+                SDFAXNetworking.sharedInstance.getUUID(phone: GlobalConstants.phoneNumber) { (uuid) in
+                    Logger.severe(message: "What the uuid: \(uuid)")
+                    GlobalConstants.set(uuid, forKey: uuidKey)
+                    r = uuid
+                    dispatchGroup.leave()
+                }
+//                Logger.warning(message: "User's UUID not set. Using `default` instead.")
+//                return "default"
+                dispatchGroup.wait()
+                Logger.info(message: "The UUID of me is: \(r)")
+                return r
             }
             return res
         }
@@ -50,6 +78,7 @@ struct GlobalConstants {
 
     static let imladrisIpKey = "The IP of imladris server"
     static var imladrisIp: String {
+//        get { return UserDefaults.standard.string(forKey: imladrisIpKey) ?? "127.0.0.1" }
         get { return UserDefaults.standard.string(forKey: imladrisIpKey) ?? "150.109.40.31" }
         set { set(newValue, forKey: imladrisIpKey) }
     }
@@ -85,7 +114,7 @@ extension GlobalConstants {
 
     // Functions
     static func set(_ value: Any? , forKey key: String) {
-        UserDefaults.setValue(value, forKey: key)
+        UserDefaults.standard.setValue(value, forKey: key)
     }
 
 }

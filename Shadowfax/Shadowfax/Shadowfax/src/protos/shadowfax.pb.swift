@@ -35,20 +35,6 @@ struct SDFAXSignupRequest {
   init() {}
 }
 
-struct SDFAXSigninRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var phone: String = String()
-
-  var validationCode: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
 struct SDFAXChangePhoneRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -83,36 +69,6 @@ struct SDFAXUserAccountReply {
   init() {}
 }
 
-struct SDFAXGetUserUUIDRequest {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var uuid: String = String()
-
-  var token: String = String()
-
-  var distPhone: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
-struct SDFAXGetUserUUIDReplay {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var statusCode: Int32 = 0
-
-  var distUuid: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
 struct SDFAXSendToRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -132,7 +88,7 @@ struct SDFAXSendToReply {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var statusCode: String = String()
+  var statusCode: Int32 = 0
 
   /// empty string if none
   var distIp: String = String()
@@ -167,6 +123,62 @@ struct SDFAXSignalReply {
   // methods supported on all messages.
 
   var statusCode: Int32 = 0
+
+  var ip: String = String()
+
+  var port: Int32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct SDFAXSigninRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var phone: String = String()
+
+  var validationCode: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct SDFAXSigninReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var statusCode: Int32 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct SDFAXGetUUIDRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var phone: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct SDFAXGetUUIDReply {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var statusCode: Int32 = 0
+
+  var uuid: String = String()
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -291,41 +303,6 @@ extension SDFAXSignupRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImple
   }
 }
 
-extension SDFAXSigninRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".SigninRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "phone"),
-    2: .standard(proto: "validation_code"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.phone)
-      case 2: try decoder.decodeSingularStringField(value: &self.validationCode)
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.phone.isEmpty {
-      try visitor.visitSingularStringField(value: self.phone, fieldNumber: 1)
-    }
-    if !self.validationCode.isEmpty {
-      try visitor.visitSingularStringField(value: self.validationCode, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  func _protobuf_generated_isEqualTo(other: SDFAXSigninRequest) -> Bool {
-    if self.phone != other.phone {return false}
-    if self.validationCode != other.validationCode {return false}
-    if unknownFields != other.unknownFields {return false}
-    return true
-  }
-}
-
 extension SDFAXChangePhoneRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".ChangePhoneRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -414,82 +391,6 @@ extension SDFAXUserAccountReply: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
   }
 }
 
-extension SDFAXGetUserUUIDRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".GetUserUUIDRequest"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "uuid"),
-    2: .same(proto: "token"),
-    3: .standard(proto: "dist_phone"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.uuid)
-      case 2: try decoder.decodeSingularStringField(value: &self.token)
-      case 3: try decoder.decodeSingularStringField(value: &self.distPhone)
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.uuid.isEmpty {
-      try visitor.visitSingularStringField(value: self.uuid, fieldNumber: 1)
-    }
-    if !self.token.isEmpty {
-      try visitor.visitSingularStringField(value: self.token, fieldNumber: 2)
-    }
-    if !self.distPhone.isEmpty {
-      try visitor.visitSingularStringField(value: self.distPhone, fieldNumber: 3)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  func _protobuf_generated_isEqualTo(other: SDFAXGetUserUUIDRequest) -> Bool {
-    if self.uuid != other.uuid {return false}
-    if self.token != other.token {return false}
-    if self.distPhone != other.distPhone {return false}
-    if unknownFields != other.unknownFields {return false}
-    return true
-  }
-}
-
-extension SDFAXGetUserUUIDReplay: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".GetUserUUIDReplay"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "status_code"),
-    2: .standard(proto: "dist_uuid"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      switch fieldNumber {
-      case 1: try decoder.decodeSingularInt32Field(value: &self.statusCode)
-      case 2: try decoder.decodeSingularStringField(value: &self.distUuid)
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.statusCode != 0 {
-      try visitor.visitSingularInt32Field(value: self.statusCode, fieldNumber: 1)
-    }
-    if !self.distUuid.isEmpty {
-      try visitor.visitSingularStringField(value: self.distUuid, fieldNumber: 2)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  func _protobuf_generated_isEqualTo(other: SDFAXGetUserUUIDReplay) -> Bool {
-    if self.statusCode != other.statusCode {return false}
-    if self.distUuid != other.distUuid {return false}
-    if unknownFields != other.unknownFields {return false}
-    return true
-  }
-}
-
 extension SDFAXSendToRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".SendToRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -536,7 +437,7 @@ extension SDFAXSendToReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       switch fieldNumber {
-      case 1: try decoder.decodeSingularStringField(value: &self.statusCode)
+      case 1: try decoder.decodeSingularInt32Field(value: &self.statusCode)
       case 2: try decoder.decodeSingularStringField(value: &self.distIp)
       case 3: try decoder.decodeSingularStringField(value: &self.distPort)
       default: break
@@ -545,8 +446,8 @@ extension SDFAXSendToReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.statusCode.isEmpty {
-      try visitor.visitSingularStringField(value: self.statusCode, fieldNumber: 1)
+    if self.statusCode != 0 {
+      try visitor.visitSingularInt32Field(value: self.statusCode, fieldNumber: 1)
     }
     if !self.distIp.isEmpty {
       try visitor.visitSingularStringField(value: self.distIp, fieldNumber: 2)
@@ -611,6 +512,82 @@ extension SDFAXSignalReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
   static let protoMessageName: String = _protobuf_package + ".SignalReply"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "status_code"),
+    2: .same(proto: "ip"),
+    3: .same(proto: "port"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularInt32Field(value: &self.statusCode)
+      case 2: try decoder.decodeSingularStringField(value: &self.ip)
+      case 3: try decoder.decodeSingularInt32Field(value: &self.port)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.statusCode != 0 {
+      try visitor.visitSingularInt32Field(value: self.statusCode, fieldNumber: 1)
+    }
+    if !self.ip.isEmpty {
+      try visitor.visitSingularStringField(value: self.ip, fieldNumber: 2)
+    }
+    if self.port != 0 {
+      try visitor.visitSingularInt32Field(value: self.port, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: SDFAXSignalReply) -> Bool {
+    if self.statusCode != other.statusCode {return false}
+    if self.ip != other.ip {return false}
+    if self.port != other.port {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension SDFAXSigninRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".SigninRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "phone"),
+    2: .same(proto: "validationCode"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.phone)
+      case 2: try decoder.decodeSingularStringField(value: &self.validationCode)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.phone.isEmpty {
+      try visitor.visitSingularStringField(value: self.phone, fieldNumber: 1)
+    }
+    if !self.validationCode.isEmpty {
+      try visitor.visitSingularStringField(value: self.validationCode, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: SDFAXSigninRequest) -> Bool {
+    if self.phone != other.phone {return false}
+    if self.validationCode != other.validationCode {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension SDFAXSigninReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".SigninReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "status_code"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -629,8 +606,72 @@ extension SDFAXSignalReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  func _protobuf_generated_isEqualTo(other: SDFAXSignalReply) -> Bool {
+  func _protobuf_generated_isEqualTo(other: SDFAXSigninReply) -> Bool {
     if self.statusCode != other.statusCode {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension SDFAXGetUUIDRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetUUIDRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "phone"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularStringField(value: &self.phone)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.phone.isEmpty {
+      try visitor.visitSingularStringField(value: self.phone, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: SDFAXGetUUIDRequest) -> Bool {
+    if self.phone != other.phone {return false}
+    if unknownFields != other.unknownFields {return false}
+    return true
+  }
+}
+
+extension SDFAXGetUUIDReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GetUUIDReply"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "status_code"),
+    2: .same(proto: "uuid"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      switch fieldNumber {
+      case 1: try decoder.decodeSingularInt32Field(value: &self.statusCode)
+      case 2: try decoder.decodeSingularStringField(value: &self.uuid)
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.statusCode != 0 {
+      try visitor.visitSingularInt32Field(value: self.statusCode, fieldNumber: 1)
+    }
+    if !self.uuid.isEmpty {
+      try visitor.visitSingularStringField(value: self.uuid, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  func _protobuf_generated_isEqualTo(other: SDFAXGetUUIDReply) -> Bool {
+    if self.statusCode != other.statusCode {return false}
+    if self.uuid != other.uuid {return false}
     if unknownFields != other.unknownFields {return false}
     return true
   }
