@@ -7,15 +7,15 @@ fix_grpc_python_import: to_servicers to_gondor
 	cd valinor/protos/ && sed -i '' 's/^\(import.*pb2\)/from . \1/g' *.py
 
 to_servicers: protos/shadowfax.proto protos/user_account.proto protos/imladris.proto protos/valinor.proto
-	python3 -m grpc_tools.protoc -Iprotos --python_out=user_account/protos --grpc_python_out=user_account/protos protos/user_account.proto
-	python3 -m grpc_tools.protoc -Iprotos --python_out=imladris/protos --grpc_python_out=imladris/protos protos/imladris.proto
-	python3 -m grpc_tools.protoc -Iprotos --python_out=valinor/protos --grpc_python_out=valinor/protos protos/valinor.proto
-	python3 -m grpc_tools.protoc -Iprotos --python_out=py_protos --grpc_python_out=py_protos protos/shadowfax.proto
+	python3 -m grpc_tools.protoc -Iprotos --python_out=user_account/protos --grpc_python_out=user_account/protos protos/shadowfax.proto
+	python3 -m grpc_tools.protoc -Iprotos --python_out=imladris/protos --grpc_python_out=imladris/protos protos/shadowfax.proto
+	python3 -m grpc_tools.protoc -Iprotos --python_out=valinor/protos --grpc_python_out=valinor/protos protos/shadowfax.proto
 
 to_gondor: protos/shadowfax.proto protos/user_account.proto protos/imladris.proto protos/valinor.proto
-	python3 -m grpc_tools.protoc -Iprotos --python_out=py_protos --grpc_python_out=py_protos protos/user_account.proto
-	python3 -m grpc_tools.protoc -Iprotos --python_out=py_protos --grpc_python_out=py_protos protos/imladris.proto
-	python3 -m grpc_tools.protoc -Iprotos --python_out=py_protos --grpc_python_out=py_protos protos/valinor.proto
+	python3 -m grpc_tools.protoc -Iprotos --python_out=py_protos --grpc_python_out=py_protos protos/shadowfax.proto
+#	python3 -m grpc_tools.protoc -Iprotos --python_out=py_protos --grpc_python_out=py_protos protos/user_account.proto
+#	python3 -m grpc_tools.protoc -Iprotos --python_out=py_protos --grpc_python_out=py_protos protos/imladris.proto
+#	python3 -m grpc_tools.protoc -Iprotos --python_out=py_protos --grpc_python_out=py_protos protos/valinor.proto
 	protoc -Iprotos --swift_out=Shadowfax/Shadowfax/Shadowfax/src/protos --swiftgrpc_out=Client=true,Server=false:Shadowfax/Shadowfax/Shadowfax/src/protos protos/shadowfax.proto
 
 update_config: basicconfig.py

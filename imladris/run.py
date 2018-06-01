@@ -9,7 +9,9 @@ from basicconfig import get_config
 
 conf = get_config("config.conf")
 
-from protos import imladris_pb2, imladris_pb2_grpc
+# from protos import imladris_pb2, imladris_pb2_grpc
+from protos import shadowfax_pb2 as imladris_pb2
+from protos import shadowfax_pb2_grpc as imladris_pb2_grpc
 
 logging.basicConfig(format=conf.LOG_FORMAT, level=conf.LOG_LEVEL, datefmt=conf.LOG_DATE_FORMAT)
 logger = logging.getLogger(__name__)
@@ -103,8 +105,8 @@ def start_server(port):
     server = grpc.server(ThreadPoolExecutor(max_workers=100))
     imladris_pb2_grpc.add_ImladrisServicer_to_server(servicer=ImladrisServicer(), server=server)
     # MARK: Secure server
-    server.add_secure_port('0.0.0.0:{0}'.format(port), get_server_credentials())
-    #server.add_insecure_port("[::]:{0}".format(port))
+    # server.add_secure_port('0.0.0.0:{0}'.format(port), get_server_credentials())
+    server.add_insecure_port("[::]:{0}".format(port))
     logger.info("Starting gRPC server at {0}...".format(port))
     server.start()
     logger.info("gRPC server is started.")

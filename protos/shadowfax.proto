@@ -55,6 +55,8 @@ service Imladris {
     // Gandalf <-> Gondor <-> Imladris
     rpc SendTo (SendToRequest) returns (SendToReply) {
     }
+//    rpc Signin (SigninRequest) returns (SigninReply){
+//    }
     // TODO: Signaling channel
     rpc Signal (SignalRequest) returns (SignalReply){
     }
@@ -80,6 +82,14 @@ message SignalRequest {
 message SignalReply {
     int32 status_code = 1;
 }
+
+//message SigninRequest{
+//    string phone = 1;
+//}
+//
+//message SigninReply{
+//    int32 status_code = 1;
+//}
 
 //MARK: Valinor
 service Valinor {

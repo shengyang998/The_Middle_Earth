@@ -10,7 +10,8 @@ from basicconfig import get_config
 
 conf = get_config("config.conf")
 
-from protos import user_account_pb2, user_account_pb2_grpc
+from protos import shadowfax_pb2 as user_account_pb2
+from protos import shadowfax_pb2_grpc as user_account_pb2_grpc
 
 logging.basicConfig(format=conf.LOG_FORMAT, level=conf.LOG_LEVEL, datefmt=conf.LOG_DATE_FORMAT)
 logger = logging.getLogger(__name__)
@@ -161,9 +162,9 @@ def close(db, server):
 
 
 def get_server_credentials():
-    with open('./keys/imladris.key', 'rb') as f:
+    with open('./keys/user_account.key', 'rb') as f:
         private_key = f.read()
-    with open('./keys/imladris.crt', 'rb') as f:
+    with open('./keys/user_account.crt', 'rb') as f:
         certificate_chain = f.read()
     return grpc.ssl_server_credentials(((private_key, certificate_chain,),))
 

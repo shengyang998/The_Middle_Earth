@@ -1,4 +1,6 @@
 from flask import Flask
+from protos import shadowfax_pb2 as valinor_pb2
+from protos import shadowfax_pb2_grpc as valinor_pb2_grpc
 
 from basicconfig import get_config
 conf = get_config()
