@@ -50,6 +50,7 @@ extension Chat.ViewModel {
         // TODO: Send Test Message
         self._id += 1
         SDFAXNetworking.sharedInstance.sendTo(uuid: _contact.uuid, message: text, id: UInt64(self._id))
+        Logger.info(message: "Sending to uuid: \(_contact.uuid)")
         let msg = Message()
         msg.id = self._id
         msg.payload = text

@@ -103,7 +103,7 @@ extension ChatNetworking {
     // MARK: start listening methods
     func startHandShakeListening(onPort port: UInt16) {
         if let _ = try? self.listeningSocket.accept(onPort: port) {
-            self.listeningSocket.readData(toLength: headerByte, withTimeout: -1, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
+//            self.listeningSocket.readData(toLength: headerByte, withTimeout: -1, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
             Logger.info(message: "Scoket is listening on port: \(port)")
         } else {
             Logger.warning(message: "Port: \(port) has been occupied.")
@@ -132,10 +132,10 @@ extension ChatNetworking {
         // 1. already accept on port 52013
         // 2. `did accept new socket` delegate handle rsa pub from bob
         if self.isSecured == false {
-            self.socket.readData(toLength: headerByte, withTimeout: -1, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
+            self.listeningSocket.readData(toLength: headerByte, withTimeout: -1, tag: ChatNetworkingTags.passiveHandShakeHeaderTag.rawValue)
             Logger.info(message: "Waiting to read handshake header")
         } else {
-            self.socket.readData(toLength: headerByte, withTimeout: -1, tag: ChatNetworkingTags.chatHeaderTag.rawValue)
+            self.listeningSocket.readData(toLength: headerByte, withTimeout: -1, tag: ChatNetworkingTags.chatHeaderTag.rawValue)
             Logger.info(message: "Waiting for message header to come")
         }
     }
@@ -301,7 +301,8 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
     }
 
     func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
-        self.socket = newSocket
+        Logger.info(message: "did accept new connection as \(sock)")
+        self.listeningSocket = newSocket
         self.passivelyMakeSecureHandShake()
     }
 
@@ -319,11 +320,15 @@ extension ChatNetworking: GCDAsyncSocketDelegate {
 
     func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
         Logger.info(message: "did disconnect with error: \(String(describing: err))")
-        do {
-            prepareSocket(toHost: self.host, onPort: self.port)
-            sleep(10)
+        if sock == self.socket {
+            do {
+                prepareSocket(toHost: self.host, onPort: self.port)
+                sleep(10)
+            }
+            catch { Logger.error(message: "Cannot re connect to \(host) : \(port)") }
+        } else if sock == self.listeningSocket {
+            Logger.error(message: "listenSocket disconnected.")
         }
-        catch { Logger.error(message: "Cannot re connect to \(host) : \(port)") }
     }
 
 }

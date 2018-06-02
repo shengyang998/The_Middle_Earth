@@ -155,8 +155,11 @@ extension SDFAXNetworking {
         try! imladrisService?.signal(request, completion: { [unowned self] (reply, result) in
             Logger.info(message: ("Get Signal Reply: \(String(describing: reply)), \(String(describing: result))"))
             if let reply = reply {
+                if reply.statusCode == 200 {
                 if reply.ip != "", reply.port != 0 {
+                    Logger.info(message: "Signal Reply with host: \(reply.ip) : \(reply.port)")
                     self.chatNetwork.prepareUdpSocket(toHost: reply.ip, onPort: UInt16(reply.port))
+                    }
                 }
             } else {
                 Logger.warning(message: "gRPC Signal result: \(result)")
